@@ -21,3 +21,26 @@ Mat::~Mat()
 	delete[] this->data;
 	this->data = nullptr;
 }
+
+// Sum
+Mat *Mat::operator+(Mat *other)
+{
+	if (this->rows != other->rows || this->cols != other->cols)
+	{
+		throw "Matrices must have the same dimensions";
+	}
+
+	float **data = new float *[this->rows];
+
+	for (int i = 0; i < this->rows; i++)
+	{
+		data[i] = new float[this->cols];
+
+		for (int j = 0; j < this->cols; j++)
+		{
+			data[i][j] = this->data[i][j] + other->data[i][j];
+		}
+	}
+
+	return new Mat(data, this->rows, this->cols);
+}
