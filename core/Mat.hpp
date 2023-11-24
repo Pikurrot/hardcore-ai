@@ -26,4 +26,7 @@ public:
 	Mat *operator+(float scalar); // sum
 	Mat *operator-(float scalar); // difference
 	Mat *operator*(float scalar); // product
+
+	// Transpose
+	Mat *T();
 };

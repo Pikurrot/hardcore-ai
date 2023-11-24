@@ -144,3 +144,21 @@ Mat *Mat::operator*(float scalar)
 
 	return new Mat(data, this->rows, this->cols);
 }
+
+// Transpose
+Mat *Mat::T()
+{
+	float **data = new float *[this->cols];
+
+	for (int i = 0; i < this->cols; i++)
+	{
+		data[i] = new float[this->rows];
+
+		for (int j = 0; j < this->rows; j++)
+		{
+			data[i][j] = this->data[j][i];
+		}
+	}
+
+	return new Mat(data, this->cols, this->rows);
+}
