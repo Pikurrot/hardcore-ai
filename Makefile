@@ -8,7 +8,7 @@ CFLAGS = -Wall -std=c++14
 INCLUDES = -I./core -I./tests
 
 # Source files
-SRCS = $(wildcard core/*.cpp tests/*.cpp)
+SRCS = $(wildcard core/*.cpp tests/*.cpp deep_learning/*.cpp)
 
 # Object files directory
 OBJDIR = obj
