@@ -22,6 +22,12 @@ Mat *zeros(int rows, int cols)
 	return new Mat(data, rows, cols);
 }
 
+// Return a random value between 0 and 1
+float random()
+{
+	return (float)rand() / RAND_MAX;
+}
+
 // Return a matrix of random values between 0 and 1
 Mat *random(int rows, int cols)
 {
@@ -66,4 +72,27 @@ Mat *dot(Mat *a, Mat *b)
 	}
 
 	return new Mat(data, a->getRows(), b->getCols());
+}
+
+// Sigmoid
+float sigmoid(float x)
+{
+	return 1 / (1 + exp(-x));
+}
+
+Mat *sigmoid(Mat *x)
+{
+	float **data = new float *[x->getRows()];
+
+	for (int i = 0; i < x->getRows(); i++)
+	{
+		data[i] = new float[x->getCols()];
+
+		for (int j = 0; j < x->getCols(); j++)
+		{
+			data[i][j] = sigmoid(x->getData()[i][j]);
+		}
+	}
+
+	return new Mat(data, x->getRows(), x->getCols());
 }
