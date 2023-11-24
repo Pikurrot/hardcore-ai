@@ -8,7 +8,7 @@ using namespace std;
 Mat *zeros(int rows, int cols);
 
 // Return a random value between 0 and 1
-float random();
+float randomF();
 Mat *random(int rows, int cols);
 
 // Dot product

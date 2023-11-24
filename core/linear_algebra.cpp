@@ -23,7 +23,7 @@ Mat *zeros(int rows, int cols)
 }
 
 // Return a random value between 0 and 1
-float random()
+float randomF()
 {
 	return (float)rand() / RAND_MAX;
 }
@@ -39,7 +39,7 @@ Mat *random(int rows, int cols)
 
 		for (int j = 0; j < cols; j++)
 		{
-			data[i][j] = (float)rand() / RAND_MAX;
+			data[i][j] = randomF();
 		}
 	}
 
