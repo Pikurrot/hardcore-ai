@@ -3,3 +3,4 @@
 void testZeros();
 void testRandom();
 void testDot();
+void testSigmoid();

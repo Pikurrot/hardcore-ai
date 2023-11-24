@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
 			testMatScalarAddition();
 			testMatScalarSubtraction();
 			testMatScalarProduct();
+			testSigmoid();
 			std::cout << "All tests passed!\n";
 		}
 		else
@@ -32,6 +33,7 @@ int main(int argc, char *argv[])
 					testZeros();
 					testRandom();
 					testDot();
+					testSigmoid();
 				}
 				else if (test_name == "Mat")
 				{
