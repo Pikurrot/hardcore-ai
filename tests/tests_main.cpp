@@ -14,6 +14,11 @@ int main(int argc, char *argv[])
 			testDot();
 			testMatConstructor();
 			testMatAddition();
+			testMatSubtraction();
+			testMatElementWiseProduct();
+			testMatScalarAddition();
+			testMatScalarSubtraction();
+			testMatScalarProduct();
 			std::cout << "All tests passed!\n";
 		}
 		else
@@ -32,6 +37,11 @@ int main(int argc, char *argv[])
 				{
 					testMatConstructor();
 					testMatAddition();
+					testMatSubtraction();
+					testMatElementWiseProduct();
+					testMatScalarAddition();
+					testMatScalarSubtraction();
+					testMatScalarProduct();
 				}
 			}
 			std::cout << "Specified tests passed!\n";
