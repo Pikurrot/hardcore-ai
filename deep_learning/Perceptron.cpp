@@ -5,11 +5,24 @@
 Perceptron::Perceptron(int nInputs)
 {
 	this->weights = random(1, nInputs);
-	this->bias = random();
+	this->bias = randomF();
 }
 
 Perceptron::~Perceptron()
 {
 	delete this->weights;
 	this->weights = nullptr;
+}
+
+// Forward propagation
+float Perceptron::forward(Mat *inputs)
+{
+	Mat *weighted;
+	float weightedSum;
+
+	weighted = dot(this->weights, inputs->T());
+	weightedSum = weighted->getData()[0][0] + this->bias;
+	delete weighted;
+	weighted = nullptr;
+	return sigmoid(weightedSum);
 }

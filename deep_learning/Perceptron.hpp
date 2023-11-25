@@ -11,4 +11,7 @@ private:
 public:
 	Perceptron(int nInputs);
 	~Perceptron();
+
+	// forward propagation
+	float forward(Mat *inputs);
 };
