@@ -1,5 +1,6 @@
 #include "tests_linear_algebra.hpp"
 #include "tests_Mat.hpp"
+#include "tests_Perceptron.hpp"
 #include <iostream>
 
 int main(int argc, char *argv[])
@@ -20,6 +21,8 @@ int main(int argc, char *argv[])
 			testMatScalarSubtraction();
 			testMatScalarProduct();
 			testSigmoid();
+			testPerceptronConstructor();
+			testPerceptronForward();
 			std::cout << "All tests passed!\n";
 		}
 		else
@@ -44,6 +47,15 @@ int main(int argc, char *argv[])
 					testMatScalarAddition();
 					testMatScalarSubtraction();
 					testMatScalarProduct();
+				}
+				else if (test_name == "Perceptron")
+				{
+					testPerceptronConstructor();
+					testPerceptronForward();
+				}
+				else
+				{
+					throw "Invalid test name";
 				}
 			}
 			std::cout << "Specified tests passed!\n";
