@@ -2,19 +2,21 @@
 #include "../core/linear_algebra.hpp"
 #include "../core/Mat.hpp"
 
+// Creates a Perceptron with random weights and bias.
 Perceptron::Perceptron(int nInputs)
 {
 	this->weights = random(1, nInputs);
 	this->bias = randomF();
 }
 
+// Releases the Perceptron's weights.
 Perceptron::~Perceptron()
 {
 	delete this->weights;
 	this->weights = nullptr;
 }
 
-// Forward propagation
+// Forward propagation: sigmoid(inputs * weights + bias).
 float Perceptron::forward(Mat *inputs)
 {
 	Mat *weighted;

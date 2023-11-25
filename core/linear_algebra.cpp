@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// Return a matrix of zeros
+// Returns a matrix of zeros.
 Mat *zeros(int rows, int cols)
 {
 	float **data = new float *[rows];
@@ -22,13 +22,13 @@ Mat *zeros(int rows, int cols)
 	return new Mat(data, rows, cols);
 }
 
-// Return a random value between 0 and 1
+// Returns a random float between 0 and 1.
 float randomF()
 {
 	return (float)rand() / RAND_MAX;
 }
 
-// Return a matrix of random values between 0 and 1
+// Returns a matrix of random floats between 0 and 1.
 Mat *random(int rows, int cols)
 {
 	float **data = new float *[rows];
@@ -46,7 +46,7 @@ Mat *random(int rows, int cols)
 	return new Mat(data, rows, cols);
 }
 
-// Dot product
+// Returns a new Mat, the dot product of a and b.
 Mat *dot(Mat *a, Mat *b)
 {
 	if (a->getCols() != b->getRows())
@@ -74,12 +74,13 @@ Mat *dot(Mat *a, Mat *b)
 	return new Mat(data, a->getRows(), b->getCols());
 }
 
-// Sigmoid
+// Returns the sigmoid of x.
 float sigmoid(float x)
 {
 	return 1 / (1 + exp(-x));
 }
 
+// Returns a new Mat, the sigmoid of x.
 Mat *sigmoid(Mat *x)
 {
 	float **data = new float *[x->getRows()];

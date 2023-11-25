@@ -2,7 +2,7 @@
 
 using namespace std;
 
-// Constructor
+// Creates a 2D Mat object given a 2D array of floats.
 Mat::Mat(float **data, int rows, int cols)
 {
 	this->data = data;
@@ -10,7 +10,7 @@ Mat::Mat(float **data, int rows, int cols)
 	this->cols = cols;
 }
 
-// Destructor
+// Releases the Mat's data.
 Mat::~Mat()
 {
 	for (int i = 0; i < this->rows; i++)
@@ -22,7 +22,7 @@ Mat::~Mat()
 	this->data = nullptr;
 }
 
-// Sum
+// Sum of Mat and Mat.
 Mat *Mat::operator+(Mat *other)
 {
 	if (this->rows != other->rows || this->cols != other->cols)
@@ -45,7 +45,7 @@ Mat *Mat::operator+(Mat *other)
 	return new Mat(data, this->rows, this->cols);
 }
 
-// Difference
+// Difference of Mat and Mat.
 Mat *Mat::operator-(Mat *other)
 {
 	if (this->rows != other->rows || this->cols != other->cols)
@@ -68,7 +68,7 @@ Mat *Mat::operator-(Mat *other)
 	return new Mat(data, this->rows, this->cols);
 }
 
-// Element-wise product
+// Element-wise product of Mat and Mat.
 Mat *Mat::operator*(Mat *other)
 {
 	if (this->rows != other->rows || this->cols != other->cols)
@@ -91,7 +91,7 @@ Mat *Mat::operator*(Mat *other)
 	return new Mat(data, this->rows, this->cols);
 }
 
-// Sum
+// Sum of Mat and scalar.
 Mat *Mat::operator+(float scalar)
 {
 	float **data = new float *[this->rows];
@@ -109,7 +109,7 @@ Mat *Mat::operator+(float scalar)
 	return new Mat(data, this->rows, this->cols);
 }
 
-// Difference
+// Difference of Mat and scalar.
 Mat *Mat::operator-(float scalar)
 {
 	float **data = new float *[this->rows];
@@ -127,7 +127,7 @@ Mat *Mat::operator-(float scalar)
 	return new Mat(data, this->rows, this->cols);
 }
 
-// Product
+// Product of Mat and scalar.
 Mat *Mat::operator*(float scalar)
 {
 	float **data = new float *[this->rows];
@@ -145,7 +145,7 @@ Mat *Mat::operator*(float scalar)
 	return new Mat(data, this->rows, this->cols);
 }
 
-// Transpose
+// Transpose of Mat.
 Mat *Mat::T()
 {
 	float **data = new float *[this->cols];
