@@ -13,6 +13,9 @@ int main(int argc, char *argv[])
 			testZeros();
 			testRandom();
 			testDot();
+			testTruthTableInputs();
+			testTruthTableOutputs();
+			testSigmoid();
 			testMatConstructor();
 			testMatAddition();
 			testMatSubtraction();
@@ -20,7 +23,6 @@ int main(int argc, char *argv[])
 			testMatScalarAddition();
 			testMatScalarSubtraction();
 			testMatScalarProduct();
-			testSigmoid();
 			testPerceptronConstructor();
 			testPerceptronForward();
 			std::cout << "All tests passed!\n";
@@ -37,6 +39,8 @@ int main(int argc, char *argv[])
 					testRandom();
 					testDot();
 					testSigmoid();
+					testTruthTableInputs();
+					testTruthTableOutputs();
 				}
 				else if (test_name == "Mat")
 				{
@@ -64,6 +68,14 @@ int main(int argc, char *argv[])
 	catch (const char *error)
 	{
 		std::cerr << error << "\n";
+	}
+	catch (std::string error)
+	{
+		std::cerr << error << "\n";
+	}
+	catch (...)
+	{
+		std::cerr << "An unknown error occurred\n";
 	}
 	return 0;
 }
