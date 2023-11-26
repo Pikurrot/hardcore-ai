@@ -2,8 +2,6 @@
 #include "Mat.hpp"
 #include <random>
 
-using namespace std;
-
 Mat *zeros(int rows, int cols);
 
 float randomF();

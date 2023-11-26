@@ -19,7 +19,6 @@ Mat::~Mat()
 	}
 
 	delete[] this->data;
-	this->data = nullptr;
 }
 
 // Sum of Mat and Mat.
@@ -27,7 +26,7 @@ Mat *Mat::operator+(Mat *other)
 {
 	if (this->rows != other->rows || this->cols != other->cols)
 	{
-		throw "Matrices must have the same dimensions";
+		throw "Mat +: Matrices must have the same dimensions";
 	}
 
 	float **data = new float *[this->rows];

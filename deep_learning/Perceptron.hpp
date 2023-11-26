@@ -9,7 +9,7 @@ private:
 	Mat *w;
 	float b;
 	float alpha; // learning rate
-	vector<float> costs;
+	std::vector<float> costs;
 
 public:
 	Perceptron(int n, float alpha = 0.01);

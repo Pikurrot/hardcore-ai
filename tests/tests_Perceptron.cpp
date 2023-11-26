@@ -10,17 +10,13 @@ void testPerceptronConstructor()
 	try
 	{
 		p = new Perceptron(2);
+		delete p;
 	}
 	catch (const char *e)
 	{
-		std::string msg = "Perceptron constructor failed: ";
-		msg += e;
 		delete p;
-		p = nullptr;
-		throw msg.c_str();
+		throw "testPerceptronConstructor failed: " + std::string(e);
 	}
-	delete p;
-	p = nullptr;
 }
 
 void testPerceptronForward()
@@ -36,19 +32,19 @@ void testPerceptronForward()
 		{
 			throw "Perceptron output out of range";
 		}
+		delete p;
+		delete inputs;
 	}
 	catch (const char *e)
 	{
-		std::string msg = "Perceptron forward failed: ";
-		msg += e;
 		delete p;
-		p = nullptr;
 		delete inputs;
-		inputs = nullptr;
-		throw msg;
+		throw "Perceptron forward failed: " + std::string(e);
 	}
-	delete p;
-	p = nullptr;
-	delete inputs;
-	inputs = nullptr;
+	catch (std::string e)
+	{
+		delete p;
+		delete inputs;
+		throw "Perceptron forward failed: " + e;
+	}
 }

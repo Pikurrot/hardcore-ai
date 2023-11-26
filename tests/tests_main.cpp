@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 			testMatScalarProduct();
 			testPerceptronConstructor();
 			testPerceptronForward();
-			std::cout << "All tests passed!\n";
+			std::cout << "All tests passed!" << std::endl;
 		}
 		else
 		{
@@ -62,20 +62,20 @@ int main(int argc, char *argv[])
 					throw "Invalid test name";
 				}
 			}
-			std::cout << "Specified tests passed!\n";
+			std::cout << "Specified tests passed!" << std::endl;
 		}
 	}
 	catch (const char *error)
 	{
-		std::cerr << error << "\n";
+		std::cerr << error << std::endl;
 	}
 	catch (std::string error)
 	{
-		std::cerr << error << "\n";
+		std::cerr << error << std::endl;
 	}
 	catch (...)
 	{
-		std::cerr << "An unknown error occurred\n";
+		std::cerr << "An unknown error occurred" << std::endl;
 	}
 	return 0;
 }

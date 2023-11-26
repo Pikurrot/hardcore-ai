@@ -1,10 +1,9 @@
 #include "linear_algebra.hpp"
 #include "Mat.hpp"
 #include <random>
+#include <string>
 
-using namespace std;
-
-// Returns a matrix of zeros.
+// Returns a new Mat of zeros.
 Mat *zeros(int rows, int cols)
 {
 	float **data = new float *[rows];
@@ -28,7 +27,7 @@ float randomF()
 	return (float)rand() / RAND_MAX;
 }
 
-// Returns a matrix of random floats between 0 and 1.
+// Returns a new Mat of random floats between 0 and 1.
 Mat *random(int rows, int cols)
 {
 	float **data = new float *[rows];
@@ -51,7 +50,7 @@ Mat *dot(Mat *a, Mat *b)
 {
 	if (a->getCols() != b->getRows())
 	{
-		throw "Matrices must have compatible dimensions";
+		throw "Mat dot: Matrices must have compatible dimensions";
 	}
 
 	float **data = new float *[a->getRows()];
@@ -77,7 +76,14 @@ Mat *dot(Mat *a, Mat *b)
 // Returns the sigmoid of x.
 float sigmoid(float x)
 {
-	return 1 / (1 + exp(-x));
+	try
+	{
+		return 1 / (1 + exp(-x));
+	}
+	catch (const char *e)
+	{
+		throw "sigmoid: " + std::string(e);
+	}
 }
 
 // Returns a new Mat, the sigmoid of x.
@@ -85,17 +91,30 @@ Mat *sigmoid(Mat *x)
 {
 	float **data = new float *[x->getRows()];
 
-	for (int i = 0; i < x->getRows(); i++)
+	try
 	{
-		data[i] = new float[x->getCols()];
-
-		for (int j = 0; j < x->getCols(); j++)
+		for (int i = 0; i < x->getRows(); i++)
 		{
-			data[i][j] = sigmoid(x->getData()[i][j]);
-		}
-	}
+			data[i] = new float[x->getCols()];
 
-	return new Mat(data, x->getRows(), x->getCols());
+			for (int j = 0; j < x->getCols(); j++)
+			{
+				data[i][j] = sigmoid(x->getData()[i][j]);
+			}
+		}
+
+		return new Mat(data, x->getRows(), x->getCols());
+	}
+	catch (const char *e)
+	{
+		delete data;
+		throw "sigmoid: " + std::string(e);
+	}
+	catch (std::string e)
+	{
+		delete data;
+		throw "sigmoid: " + e;
+	}
 }
 
 // Returns the inputs of a truth table of specified dimensions.

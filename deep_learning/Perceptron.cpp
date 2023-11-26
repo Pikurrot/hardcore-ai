@@ -15,7 +15,6 @@ Perceptron::Perceptron(int n, float alpha)
 Perceptron::~Perceptron()
 {
 	delete this->w;
-	this->w = nullptr;
 }
 
 // Forward propagation: sigmoid(x*w + b).
@@ -24,11 +23,23 @@ float Perceptron::forward(Mat *x)
 	Mat *weighted;
 	float weightedSum;
 
-	weighted = dot(this->w, x->T());
-	weightedSum = weighted->getData()[0][0] + this->b;
-	delete weighted;
-	weighted = nullptr;
-	return sigmoid(weightedSum);
+	try
+	{
+		weighted = dot(this->w, x->T());
+		weightedSum = weighted->getData()[0][0] + this->b;
+		delete weighted;
+		return sigmoid(weightedSum);
+	}
+	catch (const char *e)
+	{
+		delete weighted;
+		throw "Perceptron forward: " + std::string(e);
+	}
+	catch (std::string e)
+	{
+		delete weighted;
+		throw "Perceptron forward: " + e;
+	}
 }
 
 // Backpropagation: adjusts the weights and bias. Returns the cost.
