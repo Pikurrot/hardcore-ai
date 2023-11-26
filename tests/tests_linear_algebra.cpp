@@ -64,3 +64,30 @@ void testSigmoid()
 		}
 	}
 }
+
+void testTruthTableInputs()
+{
+	Mat *result = TruthTableInputs(4, 2);
+	if ((result->getRows() != 4 || result->getCols() != 2) ||
+		(result->getData()[0][0] != 0 || result->getData()[0][1] != 0) ||
+		(result->getData()[1][0] != 1 || result->getData()[1][1] != 0) ||
+		(result->getData()[2][0] != 0 || result->getData()[2][1] != 1) ||
+		(result->getData()[3][0] != 1 || result->getData()[3][1] != 1))
+	{
+		throw "testTruthTableInputs failed";
+	}
+}
+
+void testTruthTableOutputs()
+{
+	int array[4] = {0, 1, 1, 0};
+	Mat *result = TruthTableOutputs(array, 4);
+	if ((result->getRows() != 4 || result->getCols() != 1) ||
+		(result->getData()[0][0] != 0) ||
+		(result->getData()[1][0] != 1) ||
+		(result->getData()[2][0] != 1) ||
+		(result->getData()[3][0] != 0))
+	{
+		throw "testTruthTableOutputs failed";
+	}
+}
