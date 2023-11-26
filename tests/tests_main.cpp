@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
 			testMatScalarAddition();
 			testMatScalarSubtraction();
 			testMatScalarProduct();
+			testMatT();
 			testPerceptronConstructor();
 			testPerceptronForward();
 			std::cout << "All tests passed!" << std::endl;
@@ -51,6 +52,7 @@ int main(int argc, char *argv[])
 					testMatScalarAddition();
 					testMatScalarSubtraction();
 					testMatScalarProduct();
+					testMatT();
 				}
 				else if (test_name == "Perceptron")
 				{

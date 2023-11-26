@@ -9,3 +9,5 @@ void testMatElementWiseProduct();
 void testMatScalarAddition();
 void testMatScalarSubtraction();
 void testMatScalarProduct();
+
+void testMatT();

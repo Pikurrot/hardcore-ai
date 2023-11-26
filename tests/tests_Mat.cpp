@@ -204,4 +204,30 @@ void testMatScalarProduct()
 	}
 }
 
-//TODO: testMatT
+void testMatT()
+{
+	float **data = new float *[2];
+	data[0] = new float[2]{1.0f, 2.0f};
+	data[1] = new float[2]{3.0f, 4.0f};
+
+	Mat *mat = new Mat(data, 2, 2);
+	Mat *result = nullptr;
+
+	try
+	{
+		result = mat->T();
+
+		if (result->getData()[0][0] != 1.0f || result->getData()[0][1] != 3.0f || result->getData()[1][0] != 2.0f || result->getData()[1][1] != 4.0f)
+		{
+			throw "result has incorrect values";
+		}
+		delete mat;
+		delete result;
+	}
+	catch (const char *e)
+	{
+		delete mat;
+		delete result;
+		throw "testMatT failed: " + std::string(e);
+	}
+}
