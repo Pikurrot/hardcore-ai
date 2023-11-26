@@ -97,3 +97,35 @@ Mat *sigmoid(Mat *x)
 
 	return new Mat(data, x->getRows(), x->getCols());
 }
+
+// Returns the inputs of a truth table of specified dimensions.
+Mat *TruthTableInputs(int rows, int cols)
+{
+	float **data = new float *[rows];
+
+	for (int i = 0; i < rows; i++)
+	{
+		data[i] = new float[cols];
+
+		for (int j = 0; j < cols; j++)
+		{
+			data[i][j] = (i >> j) & 1;
+		}
+	}
+
+	return new Mat(data, rows, cols);
+}
+
+// Returns the outputs in a truth table shape
+Mat *TruthTableOutputs(int *array, int rows)
+{
+	float **data = new float *[rows];
+
+	for (int i = 0; i < rows; i++)
+	{
+		data[i] = new float[1];
+		data[i][0] = array[i];
+	}
+
+	return new Mat(data, rows, 1);
+}
