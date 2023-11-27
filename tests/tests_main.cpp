@@ -42,6 +42,8 @@ int main(int argc, char *argv[])
 			testPerceptronConstructor();
 			std::cout << "Running testPerceptronForward()..." << std::endl;
 			testPerceptronForward();
+			std::cout << "Running testPerceptronBackward()..." << std::endl;
+			testPerceptronBackward();
 			std::cout << "All tests passed!" << std::endl;
 		}
 		else
@@ -74,6 +76,7 @@ int main(int argc, char *argv[])
 				{
 					testPerceptronConstructor();
 					testPerceptronForward();
+					testPerceptronBackward();
 				}
 				else
 				{

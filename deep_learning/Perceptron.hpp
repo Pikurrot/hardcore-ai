@@ -17,6 +17,6 @@ public:
 
 	void updateCosts(const float cost) { this->costs.push_back(cost); }
 
-	float forward(const Mat &x) const;					// forward propagation
-	float backward(const Mat &x, const float y_true);	// backpropagation
+	float forward(const Mat &x) const;	// forward propagation
+	float backward(const Mat &x, const float yPred, const float yTrue); // backpropagation
 };

@@ -3,3 +3,4 @@
 void testPerceptronConstructor();
 
 void testPerceptronForward();
+void testPerceptronBackward();
