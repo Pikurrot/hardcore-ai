@@ -10,21 +10,37 @@ int main(int argc, char *argv[])
 		if (argc == 1)
 		{
 			// If no arguments are provided, run all tests
+			std::cout << "Running testZeros()..." << std::endl;
 			testZeros();
+			std::cout << "Running testRandom()..." << std::endl;
 			testRandom();
+			std::cout << "Running testDot()..." << std::endl;
 			testDot();
+			std::cout << "Running testTruthTableInputs()..." << std::endl;
 			testTruthTableInputs();
+			std::cout << "Running testTruthTableOutputs()..." << std::endl;
 			testTruthTableOutputs();
+			std::cout << "Running testSigmoid()..." << std::endl;
 			testSigmoid();
+			std::cout << "Running testMatConstructor()..." << std::endl;
 			testMatConstructor();
+			std::cout << "Running testMatAddition()..." << std::endl;
 			testMatAddition();
+			std::cout << "Running testMatSubtraction()..." << std::endl;
 			testMatSubtraction();
+			std::cout << "Running testMatElementWiseProduct()..." << std::endl;
 			testMatElementWiseProduct();
+			std::cout << "Running testMatScalarAddition()..." << std::endl;
 			testMatScalarAddition();
+			std::cout << "Running testMatScalarSubtraction()..." << std::endl;
 			testMatScalarSubtraction();
+			std::cout << "Running testMatScalarProduct()..." << std::endl;
 			testMatScalarProduct();
+			std::cout << "Running testMatT()..." << std::endl;
 			testMatT();
+			std::cout << "Running testPerceptronConstructor()..." << std::endl;
 			testPerceptronConstructor();
+			std::cout << "Running testPerceptronForward()..." << std::endl;
 			testPerceptronForward();
 			std::cout << "All tests passed!" << std::endl;
 		}

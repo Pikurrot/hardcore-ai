@@ -7,20 +7,22 @@ private:
 	int rows, cols;
 
 public:
-	Mat(float **data, int rows, int cols);
+	Mat();
+	Mat(float **data, const int rows, const int cols);
+	Mat(const Mat &other);
 	~Mat();
 
-	float **getData() { return this->data; }
-	int getRows() { return this->rows; }
-	int getCols() { return this->cols; }
+	float **getData() const { return this->data; }
+	int getRows() const { return this->rows; }
+	int getCols() const { return this->cols; }
 
-	Mat *operator+(Mat *other);	// sum
-	Mat *operator-(Mat *other);	// difference
-	Mat *operator*(Mat *other);	// element-wise product
+	Mat operator+(const Mat &other) const;	// sum
+	Mat operator-(const Mat &other) const;	// difference
+	Mat operator*(const Mat &other) const;	// element-wise product
 
-	Mat *operator+(float scalar); // scalar sum
-	Mat *operator-(float scalar); // scalar difference
-	Mat *operator*(float scalar); // scalar product
+	Mat operator+(const float scalar) const; // scalar sum
+	Mat operator-(const float scalar) const; // scalar difference
+	Mat operator*(const float scalar) const; // scalar product
 
-	Mat *T(); // transpose
+	Mat T() const; // transpose
 };

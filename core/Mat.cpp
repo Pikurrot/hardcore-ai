@@ -2,12 +2,16 @@
 
 using namespace std;
 
-// Creates a 2D Mat object given a 2D array of floats.
-Mat::Mat(float **data, int rows, int cols)
+Mat::Mat()
 {
-	this->data = data;
-	this->rows = rows;
-	this->cols = cols;
+	this->data = nullptr;
+	this->rows = 0;
+	this->cols = 0;
+}
+
+// Creates a 2D Mat object given a 2D array of floats.
+Mat::Mat(float **data, const int rows, const int cols) : data(data), rows(rows), cols(cols)
+{
 }
 
 // Releases the Mat's data.
@@ -22,9 +26,9 @@ Mat::~Mat()
 }
 
 // Sum of Mat and Mat.
-Mat *Mat::operator+(Mat *other)
+Mat Mat::operator+(const Mat &other) const
 {
-	if (this->rows != other->rows || this->cols != other->cols)
+	if (this->rows != other.rows || this->cols != other.cols)
 	{
 		throw "Mat +: Matrices must have the same dimensions";
 	}
@@ -37,17 +41,17 @@ Mat *Mat::operator+(Mat *other)
 
 		for (int j = 0; j < this->cols; j++)
 		{
-			data[i][j] = this->data[i][j] + other->data[i][j];
+			data[i][j] = this->data[i][j] + other.data[i][j];
 		}
 	}
 
-	return new Mat(data, this->rows, this->cols);
+	return Mat(data, this->rows, this->cols);
 }
 
 // Difference of Mat and Mat.
-Mat *Mat::operator-(Mat *other)
+Mat Mat::operator-(const Mat &other) const
 {
-	if (this->rows != other->rows || this->cols != other->cols)
+	if (this->rows != other.rows || this->cols != other.cols)
 	{
 		throw "Matrices must have the same dimensions";
 	}
@@ -60,17 +64,17 @@ Mat *Mat::operator-(Mat *other)
 
 		for (int j = 0; j < this->cols; j++)
 		{
-			data[i][j] = this->data[i][j] - other->data[i][j];
+			data[i][j] = this->data[i][j] - other.data[i][j];
 		}
 	}
 
-	return new Mat(data, this->rows, this->cols);
+	return Mat(data, this->rows, this->cols);
 }
 
 // Element-wise product of Mat and Mat.
-Mat *Mat::operator*(Mat *other)
+Mat Mat::operator*(const Mat &other) const
 {
-	if (this->rows != other->rows || this->cols != other->cols)
+	if (this->rows != other.rows || this->cols != other.cols)
 	{
 		throw "Matrices must have the same dimensions";
 	}
@@ -83,15 +87,15 @@ Mat *Mat::operator*(Mat *other)
 
 		for (int j = 0; j < this->cols; j++)
 		{
-			data[i][j] = this->data[i][j] * other->data[i][j];
+			data[i][j] = this->data[i][j] * other.data[i][j];
 		}
 	}
 
-	return new Mat(data, this->rows, this->cols);
+	return Mat(data, this->rows, this->cols);
 }
 
 // Sum of Mat and scalar.
-Mat *Mat::operator+(float scalar)
+Mat Mat::operator+(const float scalar) const
 {
 	float **data = new float *[this->rows];
 
@@ -105,11 +109,11 @@ Mat *Mat::operator+(float scalar)
 		}
 	}
 
-	return new Mat(data, this->rows, this->cols);
+	return Mat(data, this->rows, this->cols);
 }
 
 // Difference of Mat and scalar.
-Mat *Mat::operator-(float scalar)
+Mat Mat::operator-(const float scalar) const
 {
 	float **data = new float *[this->rows];
 
@@ -123,11 +127,11 @@ Mat *Mat::operator-(float scalar)
 		}
 	}
 
-	return new Mat(data, this->rows, this->cols);
+	return Mat(data, this->rows, this->cols);
 }
 
 // Product of Mat and scalar.
-Mat *Mat::operator*(float scalar)
+Mat Mat::operator*(const float scalar) const
 {
 	float **data = new float *[this->rows];
 
@@ -141,11 +145,11 @@ Mat *Mat::operator*(float scalar)
 		}
 	}
 
-	return new Mat(data, this->rows, this->cols);
+	return Mat(data, this->rows, this->cols);
 }
 
 // Transpose of Mat.
-Mat *Mat::T()
+Mat Mat::T() const
 {
 	float **data = new float *[this->cols];
 
@@ -159,5 +163,5 @@ Mat *Mat::T()
 		}
 	}
 
-	return new Mat(data, this->cols, this->rows);
+	return Mat(data, this->cols, this->rows);
 }

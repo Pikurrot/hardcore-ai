@@ -6,17 +6,17 @@
 class Perceptron
 {
 private:
-	Mat *w;
+	Mat w;
 	float b;
 	float alpha; // learning rate
 	std::vector<float> costs;
 
 public:
-	Perceptron(int n, float alpha = 0.01);
+	Perceptron(const int n, const float alpha = 0.01);
 	~Perceptron();
 
-	void updateCosts(float cost) { this->costs.push_back(cost); }
+	void updateCosts(const float cost) { this->costs.push_back(cost); }
 
-	float forward(Mat *x); // forward propagation
-	float backward(Mat *x, float y_true); // backpropagation
+	float forward(const Mat &x) const;					// forward propagation
+	float backward(const Mat &x, const float y_true);	// backpropagation
 };
