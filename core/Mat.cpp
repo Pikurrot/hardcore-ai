@@ -72,7 +72,7 @@ Mat Mat::operator+(const Mat &other) const
 {
 	if (this->rows != other.rows || this->cols != other.cols)
 	{
-		throw "Mat +: Matrices must have the same dimensions";
+		throw "Mat + Mat: Matrices must have the same dimensions";
 	}
 
 	float **data = new float *[this->rows];
@@ -95,7 +95,7 @@ Mat Mat::operator-(const Mat &other) const
 {
 	if (this->rows != other.rows || this->cols != other.cols)
 	{
-		throw "Matrices must have the same dimensions";
+		throw "Mat - Mat: Matrices must have the same dimensions";
 	}
 
 	float **data = new float *[this->rows];
@@ -118,7 +118,7 @@ Mat Mat::operator*(const Mat &other) const
 {
 	if (this->rows != other.rows || this->cols != other.cols)
 	{
-		throw "Matrices must have the same dimensions";
+		throw "Mat * Mat: Matrices must have the same dimensions";
 	}
 
 	float **data = new float *[this->rows];
