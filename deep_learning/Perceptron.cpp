@@ -24,7 +24,7 @@ float Perceptron::forward(const Mat &x) const
 	try
 	{
 		Mat weighted = dot(this->w, x.T());
-		weightedSum = weighted.getData()[0][0] + this->b;
+		weightedSum = weighted.getValue(0, 0) + this->b;
 		return sigmoid(weightedSum);
 	}
 	catch (const char *e)
@@ -67,5 +67,33 @@ float Perceptron::backward(const Mat &x, const float yPred, const float yTrue)
 	catch (std::string e)
 	{
 		throw "Perceptron backward: " + e;
+	}
+}
+
+// Trains the Perceptron on the given data.
+void Perceptron::train(const Mat &x, const Mat &yTrue, const int epochs)
+{
+	try
+	{
+		for (int epoch = 0; epoch < epochs; epoch++)
+		{
+			float cost = 0;
+
+			for (int i = 0; i < x.getRows(); i++)
+			{
+				float yPred = this->forward(x.getRow(i));
+				cost += this->backward(x.getRow(i), yPred, yTrue.getValue(i, 0));
+			}
+
+			this->updateCosts(cost);
+		}
+	}
+	catch (const char *e)
+	{
+		throw "Perceptron train: " + std::string(e);
+	}
+	catch (std::string e)
+	{
+		throw "Perceptron train: " + e;
 	}
 }

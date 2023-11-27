@@ -16,7 +16,9 @@ public:
 	~Perceptron();
 
 	void updateCosts(const float cost) { this->costs.push_back(cost); }
+	std::vector<float> getCosts() const { return this->costs; }
 
 	float forward(const Mat &x) const;	// forward propagation
 	float backward(const Mat &x, const float yPred, const float yTrue); // backpropagation
+	void train(const Mat &x, const Mat &yTrue, const int epochs = 100); // train using backpropagation
 };
