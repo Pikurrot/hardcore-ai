@@ -207,3 +207,41 @@ Mat Mat::T() const
 
 	return Mat(data, this->cols, this->rows);
 }
+
+// Returns a row of the Mat.
+Mat Mat::getRow(const int row) const
+{
+	if (row < 0 || row >= this->rows)
+	{
+		throw "Mat getRow: Row index out of bounds";
+	}
+
+	float **data = new float *[1];
+	data[0] = new float[this->cols];
+
+	for (int i = 0; i < this->cols; i++)
+	{
+		data[0][i] = this->data[row][i];
+	}
+
+	return Mat(data, 1, this->cols);
+}
+
+// Returns a column of the Mat.
+Mat Mat::getCol(const int col) const
+{
+	if (col < 0 || col >= this->cols)
+	{
+		throw "Mat getCol: Column index out of bounds";
+	}
+
+	float **data = new float *[this->rows];
+
+	for (int i = 0; i < this->rows; i++)
+	{
+		data[i] = new float[1];
+		data[i][0] = this->data[i][col];
+	}
+
+	return Mat(data, this->rows, 1);
+}

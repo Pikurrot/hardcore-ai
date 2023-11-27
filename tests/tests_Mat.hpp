@@ -11,3 +11,6 @@ void testMatScalarSubtraction();
 void testMatScalarProduct();
 
 void testMatT();
+
+void testMatGetRow();
+void testMatGetCol();

@@ -27,4 +27,7 @@ public:
 	Mat operator*(const float scalar) const; // scalar product
 
 	Mat T() const; // transpose
+
+	Mat getRow(const int row) const;
+	Mat getCol(const int col) const;
 };

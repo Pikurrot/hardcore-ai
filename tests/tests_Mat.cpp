@@ -192,3 +192,49 @@ void testMatT()
 		throw "testMatT failed: " + std::string(e);
 	}
 }
+
+void testMatGetRow()
+{
+	float **data = new float *[2];
+	data[0] = new float[2]{1.0f, 2.0f};
+	data[1] = new float[2]{3.0f, 4.0f};
+
+	Mat mat(data, 2, 2);
+
+	try
+	{
+		Mat result = mat.getRow(0);
+
+		if (result.getData()[0][0] != 1.0f || result.getData()[0][1] != 2.0f)
+		{
+			throw "result has incorrect values";
+		}
+	}
+	catch (const char *e)
+	{
+		throw "testMatGetRow failed: " + std::string(e);
+	}
+}
+
+void testMatGetCol()
+{
+	float **data = new float *[2];
+	data[0] = new float[2]{1.0f, 2.0f};
+	data[1] = new float[2]{3.0f, 4.0f};
+
+	Mat mat(data, 2, 2);
+
+	try
+	{
+		Mat result = mat.getCol(0);
+
+		if (result.getData()[0][0] != 1.0f || result.getData()[1][0] != 3.0f)
+		{
+			throw "result has incorrect values";
+		}
+	}
+	catch (const char *e)
+	{
+		throw "testMatGetCol failed: " + std::string(e);
+	}
+}

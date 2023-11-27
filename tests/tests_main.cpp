@@ -38,6 +38,10 @@ int main(int argc, char *argv[])
 			testMatScalarProduct();
 			std::cout << "Running testMatT()..." << std::endl;
 			testMatT();
+			std::cout << "Running testMatGetRow()..." << std::endl;
+			testMatGetRow();
+			std::cout << "Running testMatGetCol()..." << std::endl;
+			testMatGetCol();
 			std::cout << "Running testPerceptronConstructor()..." << std::endl;
 			testPerceptronConstructor();
 			std::cout << "Running testPerceptronForward()..." << std::endl;
@@ -71,6 +75,8 @@ int main(int argc, char *argv[])
 					testMatScalarSubtraction();
 					testMatScalarProduct();
 					testMatT();
+					testMatGetRow();
+					testMatGetCol();
 				}
 				else if (test_name == "Perceptron")
 				{
