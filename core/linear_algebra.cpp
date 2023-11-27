@@ -148,3 +148,51 @@ Mat truthTableOutputs(const int *array, const int rows)
 
 	return Mat(data, rows, 1);
 }
+
+// Sum of scalar and Mat
+Mat operator+(const float scalar, const Mat &other)
+{
+	return other + scalar;
+}
+
+// Difference of scalar and Mat
+Mat operator-(const float scalar, const Mat &other)
+{
+	float **data = new float *[other.getRows()];
+
+	for (int i = 0; i < other.getRows(); i++)
+	{
+		data[i] = new float[other.getCols()];
+
+		for (int j = 0; j < other.getCols(); j++)
+		{
+			data[i][j] = scalar - other.getValue(i, j);
+		}
+	}
+
+	return Mat(data, other.getRows(), other.getCols());
+}
+
+// Product of scalar and Mat
+Mat operator*(const float scalar, const Mat &other)
+{
+	return other * scalar;
+}
+
+// Division of scalar and Mat
+Mat operator/(const float scalar, const Mat &other)
+{
+	float **data = new float *[other.getRows()];
+
+	for (int i = 0; i < other.getRows(); i++)
+	{
+		data[i] = new float[other.getCols()];
+
+		for (int j = 0; j < other.getCols(); j++)
+		{
+			data[i][j] = scalar / other.getValue(i, j);
+		}
+	}
+
+	return Mat(data, other.getRows(), other.getCols());
+}

@@ -14,3 +14,8 @@ Mat sigmoid(const Mat &x);
 
 Mat truthTableInputs(const int rows, const int cols);
 Mat truthTableOutputs(const int *array, const int rows);
+
+Mat operator+(const float a, const Mat &b);
+Mat operator-(const float a, const Mat &b);
+Mat operator*(const float a, const Mat &b);
+Mat operator/(const float a, const Mat &b);
