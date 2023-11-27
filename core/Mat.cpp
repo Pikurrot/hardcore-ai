@@ -14,6 +14,22 @@ Mat::Mat(float **data, const int rows, const int cols) : data(data), rows(rows),
 {
 }
 
+// Creates a copy of a 2D Mat object.
+Mat::Mat(const Mat &other)
+{
+	this->rows = other.rows;
+	this->cols = other.cols;
+	this->data = new float *[this->rows];
+	for (int i = 0; i < rows; i++)
+	{
+		this->data[i] = new float[cols];
+		for (int j = 0; j < cols; j++)
+		{
+			this->data[i][j] = other.data[i][j];
+		}
+	}
+}
+
 // Releases the Mat's data.
 Mat::~Mat()
 {
@@ -23,6 +39,32 @@ Mat::~Mat()
 	}
 
 	delete[] this->data;
+}
+
+// Copies the data from another Mat.
+Mat &Mat::operator=(const Mat &other)
+{
+	if (this != &other)
+	{
+		for (int i = 0; i < this->rows; i++)
+		{
+			delete[] this->data[i];
+		}
+		delete[] this->data;
+
+		rows = other.rows;
+		cols = other.cols;
+		data = new float *[rows];
+		for (int i = 0; i < rows; i++)
+		{
+			data[i] = new float[cols];
+			for (int j = 0; j < cols; j++)
+			{
+				data[i][j] = other.data[i][j];
+			}
+		}
+	}
+	return *this;
 }
 
 // Sum of Mat and Mat.

@@ -16,6 +16,8 @@ public:
 	int getRows() const { return this->rows; }
 	int getCols() const { return this->cols; }
 
+	Mat &operator=(const Mat &other); // assignment
+
 	Mat operator+(const Mat &other) const;	// sum
 	Mat operator-(const Mat &other) const;	// difference
 	Mat operator*(const Mat &other) const;	// element-wise product
