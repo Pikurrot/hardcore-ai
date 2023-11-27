@@ -118,7 +118,7 @@ Mat sigmoid(const Mat &x)
 }
 
 // Returns the inputs of a truth table of specified dimensions.
-Mat TruthTableInputs(const int rows, const int cols)
+Mat truthTableInputs(const int rows, const int cols)
 {
 	float **data = new float *[rows];
 
@@ -136,7 +136,7 @@ Mat TruthTableInputs(const int rows, const int cols)
 }
 
 // Returns the outputs in a truth table shape
-Mat TruthTableOutputs(const int *array, const int rows)
+Mat truthTableOutputs(const int *array, const int rows)
 {
 	float **data = new float *[rows];
 

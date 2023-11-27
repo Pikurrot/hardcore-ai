@@ -12,5 +12,5 @@ Mat dot(const Mat &a, const Mat &b);
 float sigmoid(const float x);
 Mat sigmoid(const Mat &x);
 
-Mat TruthTableInputs(const int rows, const int cols);
-Mat TruthTableOutputs(const int *array, const int rows);
+Mat truthTableInputs(const int rows, const int cols);
+Mat truthTableOutputs(const int *array, const int rows);

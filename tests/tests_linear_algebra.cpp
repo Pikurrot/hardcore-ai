@@ -86,7 +86,7 @@ void testSigmoid()
 
 void testTruthTableInputs()
 {
-	Mat result = TruthTableInputs(4, 2);
+	Mat result = truthTableInputs(4, 2);
 	if ((result.getRows() != 4 || result.getCols() != 2) ||
 		(result.getData()[0][0] != 0 || result.getData()[0][1] != 0) ||
 		(result.getData()[1][0] != 1 || result.getData()[1][1] != 0) ||
@@ -100,7 +100,7 @@ void testTruthTableInputs()
 void testTruthTableOutputs()
 {
 	int array[4] = {0, 1, 1, 0};
-	Mat result = TruthTableOutputs(array, 4);
+	Mat result = truthTableOutputs(array, 4);
 	if ((result.getRows() != 4 || result.getCols() != 1) ||
 		(result.getData()[0][0] != 0) ||
 		(result.getData()[1][0] != 1) ||
