@@ -15,6 +15,8 @@ public:
 	float **getData() const { return this->data; }
 	int getRows() const { return this->rows; }
 	int getCols() const { return this->cols; }
+	float getValue(const int row, const int col) const;
+	void setValue(const int row, const int col, const float value);
 
 	Mat &operator=(const Mat &other); // assignment
 

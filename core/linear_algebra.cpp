@@ -65,7 +65,7 @@ Mat dot(const Mat &a, const Mat &b)
 
 			for (int k = 0; k < a.getCols(); k++)
 			{
-				data[i][j] += a.getData()[i][k] * b.getData()[k][j];
+				data[i][j] += a.getValue(i, k) * b.getValue(k, j);
 			}
 		}
 	}
@@ -99,7 +99,7 @@ Mat sigmoid(const Mat &x)
 
 			for (int j = 0; j < x.getCols(); j++)
 			{
-				data[i][j] = sigmoid(x.getData()[i][j]);
+				data[i][j] = sigmoid(x.getValue(i, j));
 			}
 		}
 

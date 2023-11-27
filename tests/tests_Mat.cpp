@@ -34,7 +34,7 @@ void testMatAddition()
 	{
 		Mat result = mat1 + mat2;
 
-		if (result.getData()[0][0] != 6.0f || result.getData()[0][1] != 8.0f || result.getData()[1][0] != 10.0f || result.getData()[1][1] != 12.0f)
+		if (result.getValue(0, 0) != 6.0f || result.getValue(0, 1) != 8.0f || result.getValue(1, 0) != 10.0f || result.getValue(1, 1) != 12.0f)
 		{
 			throw "result has incorrect values";
 		}
@@ -62,7 +62,7 @@ void testMatSubtraction()
 	{
 		Mat result = mat1 - mat2;
 
-		if (result.getData()[0][0] != -4.0f || result.getData()[0][1] != -4.0f || result.getData()[1][0] != -4.0f || result.getData()[1][1] != -4.0f)
+		if (result.getValue(0, 0) != -4.0f || result.getValue(0, 1) != -4.0f || result.getValue(1, 0) != -4.0f || result.getValue(1, 1) != -4.0f)
 		{
 			throw "result has incorrect values";
 		}
@@ -90,7 +90,7 @@ void testMatElementWiseProduct()
 	{
 		Mat result = mat1 * mat2;
 
-		if (result.getData()[0][0] != 5.0f || result.getData()[0][1] != 12.0f || result.getData()[1][0] != 21.0f || result.getData()[1][1] != 32.0f)
+		if (result.getValue(0, 0) != 5.0f || result.getValue(0, 1) != 12.0f || result.getValue(1, 0) != 21.0f || result.getValue(1, 1) != 32.0f)
 		{
 			throw "result has incorrect values";
 		}
@@ -113,7 +113,7 @@ void testMatScalarAddition()
 	{
 		Mat result = mat + 1.0f;
 
-		if (result.getData()[0][0] != 2.0f || result.getData()[0][1] != 3.0f || result.getData()[1][0] != 4.0f || result.getData()[1][1] != 5.0f)
+		if (result.getValue(0, 0) != 2.0f || result.getValue(0, 1) != 3.0f || result.getValue(1, 0) != 4.0f || result.getValue(1, 1) != 5.0f)
 		{
 			throw "result has incorrect values";
 		}
@@ -136,7 +136,7 @@ void testMatScalarSubtraction()
 	{
 		Mat result = mat - 1.0f;
 
-		if (result.getData()[0][0] != 0.0f || result.getData()[0][1] != 1.0f || result.getData()[1][0] != 2.0f || result.getData()[1][1] != 3.0f)
+		if (result.getValue(0, 0) != 0.0f || result.getValue(0, 1) != 1.0f || result.getValue(1, 0) != 2.0f || result.getValue(1, 1) != 3.0f)
 		{
 			throw "result has incorrect values";
 		}
@@ -159,7 +159,7 @@ void testMatScalarProduct()
 	{
 		Mat result = mat * 2.0f;
 
-		if (result.getData()[0][0] != 2.0f || result.getData()[0][1] != 4.0f || result.getData()[1][0] != 6.0f || result.getData()[1][1] != 8.0f)
+		if (result.getValue(0, 0) != 2.0f || result.getValue(0, 1) != 4.0f || result.getValue(1, 0) != 6.0f || result.getValue(1, 1) != 8.0f)
 		{
 			throw "result has incorrect values";
 		}
@@ -182,7 +182,7 @@ void testMatT()
 	{
 		Mat result = mat.T();
 
-		if (result.getData()[0][0] != 1.0f || result.getData()[0][1] != 3.0f || result.getData()[1][0] != 2.0f || result.getData()[1][1] != 4.0f)
+		if (result.getValue(0, 0) != 1.0f || result.getValue(0, 1) != 3.0f || result.getValue(1, 0) != 2.0f || result.getValue(1, 1) != 4.0f)
 		{
 			throw "result has incorrect values";
 		}
@@ -205,7 +205,7 @@ void testMatGetRow()
 	{
 		Mat result = mat.getRow(0);
 
-		if (result.getData()[0][0] != 1.0f || result.getData()[0][1] != 2.0f)
+		if (result.getValue(0, 0) != 1.0f || result.getValue(0, 1) != 2.0f)
 		{
 			throw "result has incorrect values";
 		}
@@ -228,7 +228,7 @@ void testMatGetCol()
 	{
 		Mat result = mat.getCol(0);
 
-		if (result.getData()[0][0] != 1.0f || result.getData()[1][0] != 3.0f)
+		if (result.getValue(0, 0) != 1.0f || result.getValue(1, 0) != 3.0f)
 		{
 			throw "result has incorrect values";
 		}

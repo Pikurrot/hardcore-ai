@@ -12,7 +12,7 @@ void testZeros()
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			if (zero_matrix.getData()[i][j] != 0.f)
+			if (zero_matrix.getValue(i, j) != 0.f)
 			{
 				throw "testZeros failed: not all elements are 0";
 			}
@@ -27,7 +27,7 @@ void testRandom()
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			if (random_matrix.getData()[i][j] < 0 || random_matrix.getData()[i][j] > 1)
+			if (random_matrix.getValue(i, j) < 0 || random_matrix.getValue(i, j) > 1)
 			{
 				throw "testRandom failed: not all elements are between 0 and 1";
 			}
@@ -67,7 +67,7 @@ void testSigmoid()
 		{
 			for (int j = 0; j < result.getCols(); j++)
 			{
-				if (result.getData()[i][j] != 0.5)
+				if (result.getValue(i, j) != 0.5)
 				{
 					throw "not all elements have the correct value";
 				}
@@ -88,10 +88,10 @@ void testTruthTableInputs()
 {
 	Mat result = truthTableInputs(4, 2);
 	if ((result.getRows() != 4 || result.getCols() != 2) ||
-		(result.getData()[0][0] != 0 || result.getData()[0][1] != 0) ||
-		(result.getData()[1][0] != 1 || result.getData()[1][1] != 0) ||
-		(result.getData()[2][0] != 0 || result.getData()[2][1] != 1) ||
-		(result.getData()[3][0] != 1 || result.getData()[3][1] != 1))
+		(result.getValue(0, 0) != 0 || result.getValue(0, 1) != 0) ||
+		(result.getValue(1, 0) != 1 || result.getValue(1, 1) != 0) ||
+		(result.getValue(2, 0) != 0 || result.getValue(2, 1) != 1) ||
+		(result.getValue(3, 0) != 1 || result.getValue(3, 1) != 1))
 	{
 		throw "testTruthTableInputs failed: incorrect result";
 	}
@@ -102,10 +102,10 @@ void testTruthTableOutputs()
 	int array[4] = {0, 1, 1, 0};
 	Mat result = truthTableOutputs(array, 4);
 	if ((result.getRows() != 4 || result.getCols() != 1) ||
-		(result.getData()[0][0] != 0) ||
-		(result.getData()[1][0] != 1) ||
-		(result.getData()[2][0] != 1) ||
-		(result.getData()[3][0] != 0))
+		(result.getValue(0, 0) != 0) ||
+		(result.getValue(1, 0) != 1) ||
+		(result.getValue(2, 0) != 1) ||
+		(result.getValue(3, 0) != 0))
 	{
 		throw "testTruthTableOutputs failed: incorrect result";
 	}

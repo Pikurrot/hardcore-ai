@@ -25,7 +25,7 @@ Mat::Mat(const Mat &other)
 		this->data[i] = new float[cols];
 		for (int j = 0; j < cols; j++)
 		{
-			this->data[i][j] = other.data[i][j];
+			this->setValue(i, j, other.getValue(i, j));
 		}
 	}
 }
@@ -39,6 +39,36 @@ Mat::~Mat()
 	}
 
 	delete[] this->data;
+}
+
+// Returns the value of a Mat element.
+float Mat::getValue(const int row, const int col) const
+{
+	if (row < 0 || row >= this->rows)
+	{
+		throw "Mat getValue: Row index out of bounds";
+	}
+	if (col < 0 || col >= this->cols)
+	{
+		throw "Mat getValue: Column index out of bounds";
+	}
+
+	return this->data[row][col];
+}
+
+// Sets the value of a Mat element.
+void Mat::setValue(const int row, const int col, const float value)
+{
+	if (row < 0 || row >= this->rows)
+	{
+		throw "Mat setValue: Row index out of bounds";
+	}
+	if (col < 0 || col >= this->cols)
+	{
+		throw "Mat setValue: Column index out of bounds";
+	}
+
+	this->data[row][col] = value;
 }
 
 // Copies the data from another Mat.
@@ -60,7 +90,7 @@ Mat &Mat::operator=(const Mat &other)
 			data[i] = new float[cols];
 			for (int j = 0; j < cols; j++)
 			{
-				data[i][j] = other.data[i][j];
+				this->setValue(i, j, other.getValue(i, j));
 			}
 		}
 	}
@@ -83,7 +113,7 @@ Mat Mat::operator+(const Mat &other) const
 
 		for (int j = 0; j < this->cols; j++)
 		{
-			data[i][j] = this->data[i][j] + other.data[i][j];
+			data[i][j] = this->getValue(i, j) + other.getValue(i, j);
 		}
 	}
 
@@ -106,7 +136,7 @@ Mat Mat::operator-(const Mat &other) const
 
 		for (int j = 0; j < this->cols; j++)
 		{
-			data[i][j] = this->data[i][j] - other.data[i][j];
+			data[i][j] = this->getValue(i, j) - other.getValue(i, j);
 		}
 	}
 
@@ -129,7 +159,7 @@ Mat Mat::operator*(const Mat &other) const
 
 		for (int j = 0; j < this->cols; j++)
 		{
-			data[i][j] = this->data[i][j] * other.data[i][j];
+			data[i][j] = this->getValue(i, j) * other.getValue(i, j);
 		}
 	}
 
@@ -147,7 +177,7 @@ Mat Mat::operator+(const float scalar) const
 
 		for (int j = 0; j < this->cols; j++)
 		{
-			data[i][j] = this->data[i][j] + scalar;
+			data[i][j] = this->getValue(i, j) + scalar;
 		}
 	}
 
@@ -165,7 +195,7 @@ Mat Mat::operator-(const float scalar) const
 
 		for (int j = 0; j < this->cols; j++)
 		{
-			data[i][j] = this->data[i][j] - scalar;
+			data[i][j] = this->getValue(i, j) - scalar;
 		}
 	}
 
@@ -183,7 +213,7 @@ Mat Mat::operator*(const float scalar) const
 
 		for (int j = 0; j < this->cols; j++)
 		{
-			data[i][j] = this->data[i][j] * scalar;
+			data[i][j] = this->getValue(i, j) * scalar;
 		}
 	}
 
@@ -201,7 +231,7 @@ Mat Mat::T() const
 
 		for (int j = 0; j < this->rows; j++)
 		{
-			data[i][j] = this->data[j][i];
+			data[i][j] = this->getValue(j, i);
 		}
 	}
 
@@ -221,7 +251,7 @@ Mat Mat::getRow(const int row) const
 
 	for (int i = 0; i < this->cols; i++)
 	{
-		data[0][i] = this->data[row][i];
+		data[0][i] = this->getValue(row, i);
 	}
 
 	return Mat(data, 1, this->cols);
@@ -240,7 +270,7 @@ Mat Mat::getCol(const int col) const
 	for (int i = 0; i < this->rows; i++)
 	{
 		data[i] = new float[1];
-		data[i][0] = this->data[i][col];
+		data[i][0] = this->getValue(i, col);
 	}
 
 	return Mat(data, this->rows, 1);
