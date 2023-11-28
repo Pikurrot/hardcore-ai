@@ -16,9 +16,9 @@ void testPerceptronForward()
 	try
 	{
 		Perceptron p(4);
-		Mat inputs = random(1, 4);
-		float output = p.forward(inputs);
-		if (output < 0 || output > 1)
+		Mat x = random(1, 4);
+		Mat yPred = p.forward(x);
+		if (any(yPred < 0) || any(yPred > 1))
 		{
 			throw "Perceptron output out of range";
 		}
@@ -38,11 +38,11 @@ void testPerceptronBackward()
 	try
 	{
 		Perceptron p(4);
-		Mat inputs = random(1, 4);
-		float yTrue = 1;
-		float yPred1 = p.forward(inputs);
+		Mat inputs = zeros(1, 4) + 1;
+		Mat yTrue = zeros(1, 1) + 1;
+		Mat yPred1 = p.forward(inputs);
 		float cost1 = p.backward(inputs, yPred1, yTrue);
-		float yPred2 = p.forward(inputs);
+		Mat yPred2 = p.forward(inputs);
 		float cost2 = p.backward(inputs, yPred2, yTrue);
 		if (cost1 < 0 || cost2 < 0)
 		{
@@ -52,7 +52,7 @@ void testPerceptronBackward()
 		{
 			throw "Perceptron cost did not decrease";
 		}
-		else if (yTrue - yPred1 <= yTrue - yPred2)
+		else if (any(yTrue - yPred1 <= yTrue - yPred2))
 		{
 			throw "Perceptron prediction did not improve";
 		}
@@ -74,16 +74,12 @@ void testPerceptronTrain()
 		Perceptron p(2, 1);
 		Mat inputs = truthTableInputs(4, 2);
 		Mat yTrue = truthTableOutputs(new int[4]{0, 0, 0, 1}, 4);
-		p.train(inputs, yTrue, 10000);
-		Mat yPred = zeros(4, 1);
-		for (int i = 0; i < inputs.getRows(); i++)
-		{
-			yPred.setValue(i, 0, p.forward(inputs.getRow(i)));
-		}
+		p.train(inputs, yTrue, 10000, 2);
+		Mat yPred = p.forward(inputs);
 
 		std::cout << "Perceptron costs:" << std::endl;
 		float prevCost = p.getCosts()[0];
-		std::cout << prevCost;
+		std::cout << prevCost << " ";
 		for (long unsigned int i = 1; i < p.getCosts().size(); i+=1000)
 		{
 			float cost = p.getCosts()[i];

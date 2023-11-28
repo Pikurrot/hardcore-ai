@@ -2,12 +2,13 @@
 #include "../core/linear_algebra.hpp"
 #include "../core/Mat.hpp"
 #include <vector>
+#include <iostream>
 
 // Creates a Perceptron with random weights and bias.
 Perceptron::Perceptron(int n, float alpha)
 {
 	this->w = random(1, n);
-	this->b = randomF();
+	this->b = random(1, 1);
 	this->alpha = alpha;
 }
 
@@ -17,15 +18,11 @@ Perceptron::~Perceptron()
 }
 
 // Forward propagation: sigmoid(x*w + b).
-float Perceptron::forward(const Mat &x) const
+Mat Perceptron::forward(const Mat &x) const
 {
-	float weightedSum;
-
 	try
 	{
-		Mat weighted = dot(this->w, x.T());
-		weightedSum = weighted.getValue(0, 0) + this->b;
-		return sigmoid(weightedSum);
+		return sigmoid(dot(x, this->w.T()) + this->b.getValue(0, 0));
 	}
 	catch (const char *e)
 	{
@@ -38,26 +35,28 @@ float Perceptron::forward(const Mat &x) const
 }
 
 // Backpropagation: adjusts the weights and bias. Returns the cost.
-float Perceptron::backward(const Mat &x, const float yPred, const float yTrue)
+float Perceptron::backward(const Mat &x, const Mat &yPred, const Mat &yTrue)
 {
 	try
 	{
+		Mat error = yTrue - yPred;
 		// Compute derivatives
-		float dcost_dypred = -(yTrue - yPred);
-		float dypred_dweightedSum = yPred * (1 - yPred);
+		Mat dcost_dypred = error * -1;
+		Mat dypred_dweightedSum = yPred * (1 - yPred);
 		Mat dweightedSum_dw = x;
 		float dweightedSum_db = 1;
 
 		// Compute gradients
-		Mat dcost_dw = dweightedSum_dw * (dcost_dypred * dypred_dweightedSum);
-		float dcost_db = dcost_dypred * dypred_dweightedSum * dweightedSum_db;
+		Mat dcost_dw = dot((dcost_dypred * dypred_dweightedSum).T(), dweightedSum_dw);
+		Mat dcost_db = dot(dcost_dypred.T(), dypred_dweightedSum) * dweightedSum_db;
 
 		// Adjust weights and bias
 		this->w = this->w - (dcost_dw * this->alpha);
 		this->b = this->b - (dcost_db * this->alpha);
 
 		// Return cost (before adjustment)
-		float cost = 0.5 * (yTrue - yPred) * (yTrue - yPred);
+		int n = yTrue.getRows();
+		float cost = 1. / (2. * n) * dot(error.T(), error).getValue(0, 0); // MSE
 		return cost;
 	}
 	catch (const char *e)
@@ -71,21 +70,21 @@ float Perceptron::backward(const Mat &x, const float yPred, const float yTrue)
 }
 
 // Trains the Perceptron on the given data.
-void Perceptron::train(const Mat &x, const Mat &yTrue, const int epochs)
+void Perceptron::train(const Mat &x, const Mat &yTrue, const int epochs, const int batchSize)
 {
 	try
 	{
+		int _batchSize = std::min(batchSize, x.getRows());
 		for (int epoch = 0; epoch < epochs; epoch++)
 		{
-			float cost = 0;
-
-			for (int i = 0; i < x.getRows(); i++)
+			for (int i = 0; i < x.getRows(); i += _batchSize)
 			{
-				float yPred = this->forward(x.getRow(i));
-				cost += this->backward(x.getRow(i), yPred, yTrue.getValue(i, 0));
+				Mat xBatch = x.slice(i, i + _batchSize);
+				Mat yTrueBatch = yTrue.slice(i, i + _batchSize);
+				Mat yPredBatch = this->forward(xBatch);
+				float cost = this->backward(xBatch, yPredBatch, yTrueBatch);
+				this->updateCosts(cost);
 			}
-
-			this->updateCosts(cost);
 		}
 	}
 	catch (const char *e)
