@@ -28,6 +28,20 @@ public:
 	Mat operator-(const float scalar) const; // scalar difference
 	Mat operator*(const float scalar) const; // scalar product
 
+	Mat operator<(const float scalar) const; // less than
+	Mat operator>(const float scalar) const; // greater than
+	Mat operator<=(const float scalar) const; // less than or equal to
+	Mat operator>=(const float scalar) const; // greater than or equal to
+	Mat operator==(const float scalar) const; // equal to
+	Mat operator!=(const float scalar) const; // not equal to
+
+	Mat operator<(const Mat &other) const; // less than
+	Mat operator>(const Mat &other) const; // greater than
+	Mat operator<=(const Mat &other) const; // less than or equal to
+	Mat operator>=(const Mat &other) const; // greater than or equal to
+	Mat operator==(const Mat &other) const; // equal to
+	Mat operator!=(const Mat &other) const; // not equal to
+
 	Mat T() const; // transpose
 
 	Mat getRow(const int row) const;

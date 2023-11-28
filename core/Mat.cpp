@@ -220,6 +220,321 @@ Mat Mat::operator*(const float scalar) const
 	return Mat(data, this->rows, this->cols);
 }
 
+// Less than of Mat and scalar.
+Mat Mat::operator<(const float scalar) const
+{
+	float **data = new float *[this->rows];
+
+	for (int i = 0; i < this->rows; i++)
+	{
+		data[i] = new float[this->cols];
+
+		for (int j = 0; j < this->cols; j++)
+		{
+			if (this->getValue(i, j) < scalar)
+			{
+				data[i][j] = 1.0f;
+			}
+			else
+			{
+				data[i][j] = 0.0f;
+			}
+		}
+	}
+
+	return Mat(data, this->rows, this->cols);
+}
+
+// Greater than of Mat and scalar.
+Mat Mat::operator>(const float scalar) const
+{
+	float **data = new float *[this->rows];
+
+	for (int i = 0; i < this->rows; i++)
+	{
+		data[i] = new float[this->cols];
+
+		for (int j = 0; j < this->cols; j++)
+		{
+			if (this->getValue(i, j) > scalar)
+			{
+				data[i][j] = 1.0f;
+			}
+			else
+			{
+				data[i][j] = 0.0f;
+			}
+		}
+	}
+
+	return Mat(data, this->rows, this->cols);
+}
+
+// Less than or equal to of Mat and scalar.
+Mat Mat::operator<=(const float scalar) const
+{
+	float **data = new float *[this->rows];
+
+	for (int i = 0; i < this->rows; i++)
+	{
+		data[i] = new float[this->cols];
+
+		for (int j = 0; j < this->cols; j++)
+		{
+			if (this->getValue(i, j) <= scalar)
+			{
+				data[i][j] = 1.0f;
+			}
+			else
+			{
+				data[i][j] = 0.0f;
+			}
+		}
+	}
+
+	return Mat(data, this->rows, this->cols);
+}
+
+// Greater than or equal to of Mat and scalar.
+Mat Mat::operator>=(const float scalar) const
+{
+	float **data = new float *[this->rows];
+
+	for (int i = 0; i < this->rows; i++)
+	{
+		data[i] = new float[this->cols];
+
+		for (int j = 0; j < this->cols; j++)
+		{
+			if (this->getValue(i, j) >= scalar)
+			{
+				data[i][j] = 1.0f;
+			}
+			else
+			{
+				data[i][j] = 0.0f;
+			}
+		}
+	}
+
+	return Mat(data, this->rows, this->cols);
+}
+
+// Equal to of Mat and scalar.
+Mat Mat::operator==(const float scalar) const
+{
+	float **data = new float *[this->rows];
+
+	for (int i = 0; i < this->rows; i++)
+	{
+		data[i] = new float[this->cols];
+		for (int j = 0; j < this->cols; j++)
+		{
+			if (this->getValue(i, j) == scalar)
+			{
+				data[i][j] = 1.0f;
+			}
+			else
+			{
+				data[i][j] = 0.0f;
+			}
+		}
+	}
+
+	return Mat(data, this->rows, this->cols);
+}
+
+// Not equal to of Mat and scalar.
+Mat Mat::operator!=(const float scalar) const
+{
+	float **data = new float *[this->rows];
+	for (int i = 0; i < this->rows; i++)
+	{
+		data[i] = new float[this->cols];
+		for (int j = 0; j < this->cols; j++)
+		{
+			if (this->getValue(i, j) != scalar)
+			{
+				data[i][j] = 1.0f;
+			}
+			else
+			{
+				data[i][j] = 0.0f;
+			}
+		}
+	}
+
+	return Mat(data, this->rows, this->cols);
+}
+
+// Less than of Mat and Mat.
+Mat Mat::operator<(const Mat &other) const
+{
+	if (this->rows != other.rows || this->cols != other.cols)
+	{
+		throw "Mat < Mat: Matrices must have the same dimensions";
+	}
+
+	float **data = new float *[this->rows];
+	for (int i = 0; i < this->rows; i++)
+	{
+		data[i] = new float[this->cols];
+		for (int j = 0; j < this->cols; j++)
+		{
+			if (this->getValue(i, j) < other.getValue(i, j))
+			{
+				data[i][j] = 1.0f;
+			}
+			else
+			{
+				data[i][j] = 0.0f;
+			}
+		}
+	}
+
+	return Mat(data, this->rows, this->cols);
+}
+
+// Greater than of Mat and Mat.
+Mat Mat::operator>(const Mat &other) const
+{
+	if (this->rows != other.rows || this->cols != other.cols)
+	{
+		throw "Mat > Mat: Matrices must have the same dimensions";
+	}
+
+	float **data = new float *[this->rows];
+	for (int i = 0; i < this->rows; i++)
+	{
+		data[i] = new float[this->cols];
+		for (int j = 0; j < this->cols; j++)
+		{
+			if (this->getValue(i, j) > other.getValue(i, j))
+			{
+				data[i][j] = 1.0f;
+			}
+			else
+			{
+				data[i][j] = 0.0f;
+			}
+		}
+	}
+
+	return Mat(data, this->rows, this->cols);
+}
+
+// Less than or equal to of Mat and Mat.
+Mat Mat::operator<=(const Mat &other) const
+{
+	if (this->rows != other.rows || this->cols != other.cols)
+	{
+		throw "Mat <= Mat: Matrices must have the same dimensions";
+	}
+
+	float **data = new float *[this->rows];
+	for (int i = 0; i < this->rows; i++)
+	{
+		data[i] = new float[this->cols];
+		for (int j = 0; j < this->cols; j++)
+		{
+			if (this->getValue(i, j) <= other.getValue(i, j))
+			{
+				data[i][j] = 1.0f;
+			}
+			else
+			{
+				data[i][j] = 0.0f;
+			}
+		}
+	}
+
+	return Mat(data, this->rows, this->cols);
+}
+
+// Greater than or equal to of Mat and Mat.
+Mat Mat::operator>=(const Mat &other) const
+{
+	if (this->rows != other.rows || this->cols != other.cols)
+	{
+		throw "Mat >= Mat: Matrices must have the same dimensions";
+	}
+
+	float **data = new float *[this->rows];
+	for (int i = 0; i < this->rows; i++)
+	{
+		data[i] = new float[this->cols];
+		for (int j = 0; j < this->cols; j++)
+		{
+			if (this->getValue(i, j) >= other.getValue(i, j))
+			{
+				data[i][j] = 1.0f;
+			}
+			else
+			{
+				data[i][j] = 0.0f;
+			}
+		}
+	}
+
+	return Mat(data, this->rows, this->cols);
+}
+
+// Equal to of Mat and Mat.
+Mat Mat::operator==(const Mat &other) const
+{
+	if (this->rows != other.rows || this->cols != other.cols)
+	{
+		throw "Mat == Mat: Matrices must have the same dimensions";
+	}
+
+	float **data = new float *[this->rows];
+	for (int i = 0; i < this->rows; i++)
+	{
+		data[i] = new float[this->cols];
+		for (int j = 0; j < this->cols; j++)
+		{
+			if (this->getValue(i, j) == other.getValue(i, j))
+			{
+				data[i][j] = 1.0f;
+			}
+			else
+			{
+				data[i][j] = 0.0f;
+			}
+		}
+	}
+
+	return Mat(data, this->rows, this->cols);
+}
+
+// Not equal to of Mat and Mat.
+Mat Mat::operator!=(const Mat &other) const
+{
+	if (this->rows != other.rows || this->cols != other.cols)
+	{
+		throw "Mat != Mat: Matrices must have the same dimensions";
+	}
+
+	float **data = new float *[this->rows];
+	for (int i = 0; i < this->rows; i++)
+	{
+		data[i] = new float[this->cols];
+		for (int j = 0; j < this->cols; j++)
+		{
+			if (this->getValue(i, j) != other.getValue(i, j))
+			{
+				data[i][j] = 1.0f;
+			}
+			else
+			{
+				data[i][j] = 0.0f;
+			}
+		}
+	}
+
+	return Mat(data, this->rows, this->cols);
+}
+
 // Transpose of Mat.
 Mat Mat::T() const
 {

@@ -20,6 +20,10 @@ int main(int argc, char *argv[])
 			testTruthTableInputs();
 			std::cout << "Running testTruthTableOutputs()..." << std::endl;
 			testTruthTableOutputs();
+			std::cout << "Running testAll()..." << std::endl;
+			testAll();
+			std::cout << "Running testAny()..." << std::endl;
+			testAny();
 			std::cout << "Running testSigmoid()..." << std::endl;
 			testSigmoid();
 			std::cout << "Running testMatConstructor()..." << std::endl;
@@ -36,6 +40,30 @@ int main(int argc, char *argv[])
 			testMatScalarSubtraction();
 			std::cout << "Running testMatScalarProduct()..." << std::endl;
 			testMatScalarProduct();
+			std::cout << "Running testMatLessThan()..." << std::endl;
+			testMatLessThan();
+			std::cout << "Running testMatGreaterThan()..." << std::endl;
+			testMatGreaterThan();
+			std::cout << "Running testMatLessThanOrEqual()..." << std::endl;
+			testMatLessThanOrEqual();
+			std::cout << "Running testMatGreaterThanOrEqual()..." << std::endl;
+			testMatGreaterThanOrEqual();
+			std::cout << "Running testMatEqual()..." << std::endl;
+			testMatEqual();
+			std::cout << "Running testMatNotEqual()..." << std::endl;
+			testMatNotEqual();
+			std::cout << "Running testMatLessThanMat()..." << std::endl;
+			testMatLessThanMat();
+			std::cout << "Running testMatGreaterThanMat()..." << std::endl;
+			testMatGreaterThanMat();
+			std::cout << "Running testMatLessThanOrEqualMat()..." << std::endl;
+			testMatLessThanOrEqualMat();
+			std::cout << "Running testMatGreaterThanOrEqualMat()..." << std::endl;
+			testMatGreaterThanOrEqualMat();
+			std::cout << "Running testMatEqualMat()..." << std::endl;
+			testMatEqualMat();
+			std::cout << "Running testMatNotEqualMat()..." << std::endl;
+			testMatNotEqualMat();
 			std::cout << "Running testMatT()..." << std::endl;
 			testMatT();
 			std::cout << "Running testMatGetRow()..." << std::endl;
@@ -66,6 +94,8 @@ int main(int argc, char *argv[])
 					testSigmoid();
 					testTruthTableInputs();
 					testTruthTableOutputs();
+					testAll();
+					testAny();
 				}
 				else if (test_name == "Mat")
 				{
@@ -76,6 +106,18 @@ int main(int argc, char *argv[])
 					testMatScalarAddition();
 					testMatScalarSubtraction();
 					testMatScalarProduct();
+					testMatLessThan();
+					testMatGreaterThan();
+					testMatLessThanOrEqual();
+					testMatGreaterThanOrEqual();
+					testMatEqual();
+					testMatNotEqual();
+					testMatLessThanMat();
+					testMatGreaterThanMat();
+					testMatLessThanOrEqualMat();
+					testMatGreaterThanOrEqualMat();
+					testMatEqualMat();
+					testMatNotEqualMat();
 					testMatT();
 					testMatGetRow();
 					testMatGetCol();

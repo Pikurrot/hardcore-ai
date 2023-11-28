@@ -170,6 +170,312 @@ void testMatScalarProduct()
 	}
 }
 
+void testMatLessThan()
+{
+	float **data = new float *[2];
+	data[0] = new float[2]{1.0f, 2.0f};
+	data[1] = new float[2]{3.0f, 4.0f};
+
+	Mat mat(data, 2, 2);
+
+	try
+	{
+		Mat result = mat < 2.0f;
+
+		if (result.getValue(0, 0) != 1.0f || result.getValue(0, 1) != 0.0f || result.getValue(1, 0) != 0.0f || result.getValue(1, 1) != 0.0f)
+		{
+			throw "result has incorrect values";
+		}
+	}
+	catch (const char *e)
+	{
+		throw "testMatLessThan failed: " + std::string(e);
+	}
+}
+
+void testMatGreaterThan()
+{
+	float **data = new float *[2];
+	data[0] = new float[2]{1.0f, 2.0f};
+	data[1] = new float[2]{3.0f, 4.0f};
+
+	Mat mat(data, 2, 2);
+
+	try
+	{
+		Mat result = mat > 2.0f;
+
+		if (result.getValue(0, 0) != 0.0f || result.getValue(0, 1) != 0.0f || result.getValue(1, 0) != 1.0f || result.getValue(1, 1) != 1.0f)
+		{
+			throw "result has incorrect values";
+		}
+	}
+	catch (const char *e)
+	{
+		throw "testMatGreaterThan failed: " + std::string(e);
+	}
+}
+
+void testMatLessThanOrEqual()
+{
+	float **data = new float *[2];
+	data[0] = new float[2]{1.0f, 2.0f};
+	data[1] = new float[2]{3.0f, 4.0f};
+
+	Mat mat(data, 2, 2);
+
+	try
+	{
+		Mat result = mat <= 2.0f;
+
+		if (result.getValue(0, 0) != 1.0f || result.getValue(0, 1) != 1.0f || result.getValue(1, 0) != 0.0f || result.getValue(1, 1) != 0.0f)
+		{
+			throw "result has incorrect values";
+		}
+	}
+	catch (const char *e)
+	{
+		throw "testMatLessThanOrEqual failed: " + std::string(e);
+	}
+}
+
+void testMatGreaterThanOrEqual()
+{
+	float **data = new float *[2];
+	data[0] = new float[2]{1.0f, 2.0f};
+	data[1] = new float[2]{3.0f, 4.0f};
+
+	Mat mat(data, 2, 2);
+
+	try
+	{
+		Mat result = mat >= 2.0f;
+
+		if (result.getValue(0, 0) != 0.0f || result.getValue(0, 1) != 1.0f || result.getValue(1, 0) != 1.0f || result.getValue(1, 1) != 1.0f)
+		{
+			throw "result has incorrect values";
+		}
+	}
+	catch (const char *e)
+	{
+		throw "testMatGreaterThanOrEqual failed: " + std::string(e);
+	}
+}
+
+void testMatEqual()
+{
+	float **data = new float *[2];
+	data[0] = new float[2]{1.0f, 2.0f};
+	data[1] = new float[2]{3.0f, 4.0f};
+
+	Mat mat(data, 2, 2);
+
+	try
+	{
+		Mat result1 = mat == 2.0f;
+
+		if (result1.getValue(0, 0) != 0.0f || result1.getValue(0, 1) != 1.0f || result1.getValue(1, 0) != 0.0f || result1.getValue(1, 1) != 0.0f)
+		{
+			throw "result1 has incorrect values";
+		}
+	}
+	catch (const char *e)
+	{
+		throw "testMatEqual failed: " + std::string(e);
+	}
+}
+
+void testMatNotEqual()
+{
+	float **data = new float *[2];
+	data[0] = new float[2]{1.0f, 2.0f};
+	data[1] = new float[2]{3.0f, 4.0f};
+
+	Mat mat(data, 2, 2);
+
+	try
+	{
+		Mat result1 = mat != 2.0f;
+
+		if (result1.getValue(0, 0) != 1.0f || result1.getValue(0, 1) != 0.0f || result1.getValue(1, 0) != 1.0f || result1.getValue(1, 1) != 1.0f)
+		{
+			throw "result1 has incorrect values";
+		}
+	}
+	catch (const char *e)
+	{
+		throw "testMatNotEqual failed: " + std::string(e);
+	}
+}
+
+void testMatLessThanMat()
+{
+	float **data1 = new float *[2];
+	data1[0] = new float[2]{1.0f, 2.0f};
+	data1[1] = new float[2]{3.0f, 4.0f};
+
+	float **data2 = new float *[2];
+	data2[0] = new float[2]{2.0f, 2.0f};
+	data2[1] = new float[2]{2.0f, 2.0f};
+
+	Mat mat1(data1, 2, 2);
+	Mat mat2(data2, 2, 2);
+
+	try
+	{
+		Mat result = mat1 < mat2;
+
+		if (result.getValue(0, 0) != 1.0f || result.getValue(0, 1) != 0.0f || result.getValue(1, 0) != 0.0f || result.getValue(1, 1) != 0.0f)
+		{
+			throw "result has incorrect values";
+		}
+	}
+	catch (const char *e)
+	{
+		throw "testMatLessThanMat failed: " + std::string(e);
+	}
+}
+
+void testMatGreaterThanMat()
+{
+	float **data1 = new float *[2];
+	data1[0] = new float[2]{1.0f, 2.0f};
+	data1[1] = new float[2]{3.0f, 4.0f};
+
+	float **data2 = new float *[2];
+	data2[0] = new float[2]{2.0f, 2.0f};
+	data2[1] = new float[2]{2.0f, 2.0f};
+
+	Mat mat1(data1, 2, 2);
+	Mat mat2(data2, 2, 2);
+
+	try
+	{
+		Mat result = mat1 > mat2;
+
+		if (result.getValue(0, 0) != 0.0f || result.getValue(0, 1) != 0.0f || result.getValue(1, 0) != 1.0f || result.getValue(1, 1) != 1.0f)
+		{
+			throw "result has incorrect values";
+		}
+	}
+	catch (const char *e)
+	{
+		throw "testMatGreaterThanMat failed: " + std::string(e);
+	}
+}
+
+void testMatLessThanOrEqualMat()
+{
+	float **data1 = new float *[2];
+	data1[0] = new float[2]{1.0f, 2.0f};
+	data1[1] = new float[2]{3.0f, 4.0f};
+
+	float **data2 = new float *[2];
+	data2[0] = new float[2]{2.0f, 2.0f};
+	data2[1] = new float[2]{2.0f, 2.0f};
+
+	Mat mat1(data1, 2, 2);
+	Mat mat2(data2, 2, 2);
+
+	try
+	{
+		Mat result = mat1 <= mat2;
+
+		if (result.getValue(0, 0) != 1.0f || result.getValue(0, 1) != 1.0f || result.getValue(1, 0) != 0.0f || result.getValue(1, 1) != 0.0f)
+		{
+			throw "result has incorrect values";
+		}
+	}
+	catch (const char *e)
+	{
+		throw "testMatLessThanOrEqualMat failed: " + std::string(e);
+	}
+}
+
+void testMatGreaterThanOrEqualMat()
+{
+	float **data1 = new float *[2];
+	data1[0] = new float[2]{1.0f, 2.0f};
+	data1[1] = new float[2]{3.0f, 4.0f};
+
+	float **data2 = new float *[2];
+	data2[0] = new float[2]{2.0f, 2.0f};
+	data2[1] = new float[2]{2.0f, 2.0f};
+
+	Mat mat1(data1, 2, 2);
+	Mat mat2(data2, 2, 2);
+
+	try
+	{
+		Mat result = mat1 >= mat2;
+
+		if (result.getValue(0, 0) != 0.0f || result.getValue(0, 1) != 1.0f || result.getValue(1, 0) != 1.0f || result.getValue(1, 1) != 1.0f)
+		{
+			throw "result has incorrect values";
+		}
+	}
+	catch (const char *e)
+	{
+		throw "testMatGreaterThanOrEqualMat failed: " + std::string(e);
+	}
+}
+
+void testMatEqualMat()
+{
+	float **data1 = new float *[2];
+	data1[0] = new float[2]{1.0f, 2.0f};
+	data1[1] = new float[2]{3.0f, 4.0f};
+
+	float **data2 = new float *[2];
+	data2[0] = new float[2]{2.0f, 2.0f};
+	data2[1] = new float[2]{2.0f, 2.0f};
+
+	Mat mat1(data1, 2, 2);
+	Mat mat2(data2, 2, 2);
+
+	try
+	{
+		Mat result1 = mat1 == mat2;
+
+		if (result1.getValue(0, 0) != 0.0f || result1.getValue(0, 1) != 1.0f || result1.getValue(1, 0) != 0.0f || result1.getValue(1, 1) != 0.0f)
+		{
+			throw "result1 has incorrect values";
+		}
+	}
+	catch (const char *e)
+	{
+		throw "testMatEqualMat failed: " + std::string(e);
+	}
+}
+
+void testMatNotEqualMat()
+{
+	float **data1 = new float *[2];
+	data1[0] = new float[2]{1.0f, 2.0f};
+	data1[1] = new float[2]{3.0f, 4.0f};
+
+	float **data2 = new float *[2];
+	data2[0] = new float[2]{2.0f, 2.0f};
+	data2[1] = new float[2]{2.0f, 2.0f};
+
+	Mat mat1(data1, 2, 2);
+	Mat mat2(data2, 2, 2);
+
+	try
+	{
+		Mat result1 = mat1 != mat2;
+
+		if (result1.getValue(0, 0) != 1.0f || result1.getValue(0, 1) != 0.0f || result1.getValue(1, 0) != 1.0f || result1.getValue(1, 1) != 1.0f)
+		{
+			throw "result1 has incorrect values";
+		}
+	}
+	catch (const char *e)
+	{
+		throw "testMatNotEqualMat failed: " + std::string(e);
+	}
+}
+
 void testMatT()
 {
 	float **data = new float *[2];
