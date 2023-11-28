@@ -544,3 +544,28 @@ void testMatGetCol()
 		throw "testMatGetCol failed: " + std::string(e);
 	}
 }
+
+void testMatSlice()
+{
+	float **data = new float *[3];
+	data[0] = new float[3]{1.0f, 2.0f, 3.0f};
+	data[1] = new float[3]{4.0f, 5.0f, 6.0f};
+	data[2] = new float[3]{7.0f, 8.0f, 9.0f};
+
+	Mat mat(data, 3, 3);
+
+	try
+	{
+		Mat result = mat.slice(1, 3);
+
+		if (result.getValue(0, 0) != 4.0f || result.getValue(0, 1) != 5.0f || result.getValue(0, 2) != 6.0f ||
+			result.getValue(1, 0) != 7.0f || result.getValue(1, 1) != 8.0f || result.getValue(1, 2) != 9.0f)
+		{
+			throw "result has incorrect values";
+		}
+	}
+	catch (const char *e)
+	{
+		throw "testMatSlice failed: " + std::string(e);
+	}
+}

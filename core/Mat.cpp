@@ -590,3 +590,34 @@ Mat Mat::getCol(const int col) const
 
 	return Mat(data, this->rows, 1);
 }
+
+// Returns a slice [start, end) of the Mat.
+Mat Mat::slice(const int start, const int end) const
+{
+	if (start < 0 || start >= this->rows)
+	{
+		throw "Mat slice: Start index out of bounds";
+	}
+	if (end <= 0 || end > this->rows)
+	{
+		throw "Mat slice: End index out of bounds";
+	}
+	if (start >= end)
+	{
+		throw "Mat slice: Start index must be less than end index";
+	}
+
+	float **data = new float *[end - start];
+
+	for (int i = 0; i < end - start; i++)
+	{
+		data[i] = new float[this->cols];
+
+		for (int j = 0; j < this->cols; j++)
+		{
+			data[i][j] = this->getValue(i + start, j);
+		}
+	}
+
+	return Mat(data, end - start, this->cols);
+}

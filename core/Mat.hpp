@@ -46,4 +46,6 @@ public:
 
 	Mat getRow(const int row) const;
 	Mat getCol(const int col) const;
+
+	Mat slice(const int start, const int end) const;
 };

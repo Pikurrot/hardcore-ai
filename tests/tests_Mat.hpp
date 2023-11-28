@@ -28,3 +28,5 @@ void testMatT();
 
 void testMatGetRow();
 void testMatGetCol();
+
+void testMatSlice();

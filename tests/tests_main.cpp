@@ -70,6 +70,8 @@ int main(int argc, char *argv[])
 			testMatGetRow();
 			std::cout << "Running testMatGetCol()..." << std::endl;
 			testMatGetCol();
+			std::cout << "Running testMatSlice()..." << std::endl;
+			testMatSlice();
 			std::cout << "Running testPerceptronConstructor()..." << std::endl;
 			testPerceptronConstructor();
 			std::cout << "Running testPerceptronForward()..." << std::endl;
@@ -121,6 +123,7 @@ int main(int argc, char *argv[])
 					testMatT();
 					testMatGetRow();
 					testMatGetCol();
+					testMatSlice();
 				}
 				else if (test_name == "Perceptron")
 				{
