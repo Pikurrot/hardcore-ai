@@ -110,3 +110,31 @@ void testTruthTableOutputs()
 		throw "testTruthTableOutputs failed: incorrect result";
 	}
 }
+
+void testAll()
+{
+	Mat a = zeros(4, 3);
+	if (all(a))
+	{
+		throw "testAll failed: all elements are 0 but all() returned true";
+	}
+	a = random(4, 3);
+	if (!all(a))
+	{
+		throw "testAll failed: there are no 0 elements but all() returned false";
+	}
+}
+
+void testAny()
+{
+	Mat a = zeros(4, 3);
+	if (any(a))
+	{
+		throw "testAny failed: all elements are 0 but any() returned true";
+	}
+	a = random(4, 3);
+	if (!any(a))
+	{
+		throw "testAny failed: there are no 0 elements but any() returned false";
+	}
+}

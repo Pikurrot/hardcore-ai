@@ -19,3 +19,6 @@ Mat operator+(const float a, const Mat &b);
 Mat operator-(const float a, const Mat &b);
 Mat operator*(const float a, const Mat &b);
 Mat operator/(const float a, const Mat &b);
+
+float all(const Mat &a);
+float any(const Mat &a);

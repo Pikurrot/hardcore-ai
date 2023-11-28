@@ -196,3 +196,37 @@ Mat operator/(const float scalar, const Mat &other)
 
 	return Mat(data, other.getRows(), other.getCols());
 }
+
+// Returns true if all elements of a Mat are true.
+float all(const Mat &a)
+{
+	for (int i = 0; i < a.getRows(); i++)
+	{
+		for (int j = 0; j < a.getCols(); j++)
+		{
+			if (a.getValue(i, j) == 0)
+			{
+				return false;
+			}
+		}
+	}
+
+	return true;
+}
+
+// Returns true if any element of a Mat is true.
+float any(const Mat &a)
+{
+	for (int i = 0; i < a.getRows(); i++)
+	{
+		for (int j = 0; j < a.getCols(); j++)
+		{
+			if (a.getValue(i, j) != 0)
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
