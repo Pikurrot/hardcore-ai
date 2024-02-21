@@ -21,6 +21,20 @@ ValuePtr Value::pow(double exponent)
 	return res;
 }
 
+ValuePtr Value::exp()
+{
+	ValuePtr res = make_shared<Value>(
+		std::exp(this->data()),
+		std::vector<ValuePtr>{ shared_from_this() }
+	);
+
+	res->_backward = [this, res]() {
+		this->setGrad(this->grad() + std::exp(this->data()) * res->grad());
+	};
+
+	return res;
+}
+
 ValuePtr operator+(ValuePtr lhs, ValuePtr rhs)
 {
 	ValuePtr res = make_shared<Value>(
