@@ -3,11 +3,12 @@
 #include <vector>
 #include <memory>
 
+struct Value;
 using std::shared_ptr;
 using std::make_shared;
 using ValuePtr = shared_ptr<Value>;
 
-class Value : public std::enable_shared_from_this<Value>
+struct Value : public std::enable_shared_from_this<Value>
 {
 private:
 	double _data;
@@ -28,6 +29,21 @@ public:
 	void setGrad(double grad) { this->_grad = grad; }
 	
 	std::vector<ValuePtr> getChildren() const { return this->_children; }
+
+	ValuePtr pow(double exponent);
+	ValuePtr exp();
 };
 
-Value operator+(ValuePtr lhs, ValuePtr rhs);
+ValuePtr operator+(ValuePtr lhs, ValuePtr rhs);
+ValuePtr operator+(ValuePtr lhs, double val);
+ValuePtr operator+(double val, ValuePtr rhs);
+ValuePtr operator*(ValuePtr lhs, ValuePtr rhs);
+ValuePtr operator*(ValuePtr lhs, double val);
+ValuePtr operator*(double val, ValuePtr rhs);
+ValuePtr operator-(ValuePtr rhs);
+ValuePtr operator-(ValuePtr lhs, ValuePtr rhs);
+ValuePtr operator-(ValuePtr lhs, double val);
+ValuePtr operator-(double val, ValuePtr rhs);
+ValuePtr operator/(ValuePtr lhs, ValuePtr rhs);
+ValuePtr operator/(ValuePtr lhs, double val);
+ValuePtr operator/(double val, ValuePtr rhs);
