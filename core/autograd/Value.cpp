@@ -35,6 +35,37 @@ ValuePtr Value::exp()
 	return res;
 }
 
+void Value::backward()
+{
+	std::vector<ValuePtr> leaves; // stack (DFS, LIFO)
+	std::vector<ValuePtr> visited; // topological order
+	leaves.push_back(shared_from_this());
+
+	// build topological order of the graph
+	while (!leaves.empty())
+	{
+		ValuePtr leaf = leaves.back();
+		leaves.pop_back();
+
+		visited.push_back(leaf);
+
+		for (ValuePtr child : leaf->getChildren())
+		{
+			if (std::find(visited.begin(), visited.end(), child) == visited.end())
+			{
+				leaves.push_back(child);
+			}
+		}
+	}
+
+	// compute gradients
+	this->setGrad(1);
+	for (auto it = visited.rbegin(); it != visited.rend(); ++it)
+	{
+		(*it)->_backward();
+	}
+}
+
 ValuePtr operator+(ValuePtr lhs, ValuePtr rhs)
 {
 	ValuePtr res = make_shared<Value>(

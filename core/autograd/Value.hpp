@@ -32,6 +32,8 @@ public:
 
 	ValuePtr pow(double exponent);
 	ValuePtr exp();
+
+	void backward();
 };
 
 ValuePtr operator+(ValuePtr lhs, ValuePtr rhs);
