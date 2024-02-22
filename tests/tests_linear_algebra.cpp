@@ -138,3 +138,15 @@ void testAny()
 		throw "testAny failed: there are no 0 elements but any() returned false";
 	}
 }
+
+void runTestsLinearAlgebra()
+{
+	testZeros();
+	testRandom();
+	testDot();
+	testSigmoid();
+	testTruthTableInputs();
+	testTruthTableOutputs();
+	testAll();
+	testAny();
+}

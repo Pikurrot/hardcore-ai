@@ -30,3 +30,5 @@ void testMatGetRow();
 void testMatGetCol();
 
 void testMatSlice();
+
+void runTestsMat();

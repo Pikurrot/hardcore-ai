@@ -77,32 +77,6 @@ void testPerceptronTrain()
 		p.train(inputs, yTrue, 10000, 2);
 		Mat yPred = p.forward(inputs);
 
-		std::cout << "Perceptron costs:" << std::endl;
-		float prevCost = p.getCosts()[0];
-		std::cout << prevCost << " ";
-		for (long unsigned int i = 1; i < p.getCosts().size(); i+=1000)
-		{
-			float cost = p.getCosts()[i];
-			char diff = cost < prevCost ? '-' : '+';
-			prevCost = cost;
-			std::cout << diff << " " << cost << " ";
-		}
-		std::cout << std::endl;
-
-		std::cout << "Perceptron outputs:" << std::endl;
-		for (int i = 0; i < inputs.getRows(); i++)
-		{
-			std::cout << yPred.getValue(i, 0) << " ";
-		}
-		std::cout << std::endl;
-
-		std::cout << "True outputs:" << std::endl;
-		for (int i = 0; i < yTrue.getRows(); i++)
-		{
-			std::cout << yTrue.getValue(i, 0) << " ";
-		}
-		std::cout << std::endl;
-
 		float epsilon = 0.05;
 		if (std::abs(yPred.getValue(0, 0) - yTrue.getValue(0, 0)) > epsilon ||
 			std::abs(yPred.getValue(1, 0) - yTrue.getValue(1, 0)) > epsilon ||
@@ -120,4 +94,12 @@ void testPerceptronTrain()
 	{
 		throw "testPerceptronTrain failed: " + e;
 	}
+}
+
+void runTestsPerceptron()
+{
+	testPerceptronConstructor();
+	testPerceptronForward();
+	testPerceptronBackward();
+	testPerceptronTrain();
 }

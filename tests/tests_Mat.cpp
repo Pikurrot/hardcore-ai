@@ -569,3 +569,30 @@ void testMatSlice()
 		throw "testMatSlice failed: " + std::string(e);
 	}
 }
+
+void runTestsMat()
+{
+	testMatConstructor();
+	testMatAddition();
+	testMatSubtraction();
+	testMatElementWiseProduct();
+	testMatScalarAddition();
+	testMatScalarSubtraction();
+	testMatScalarProduct();
+	testMatLessThan();
+	testMatGreaterThan();
+	testMatLessThanOrEqual();
+	testMatGreaterThanOrEqual();
+	testMatEqual();
+	testMatNotEqual();
+	testMatLessThanMat();
+	testMatGreaterThanMat();
+	testMatLessThanOrEqualMat();
+	testMatGreaterThanOrEqualMat();
+	testMatEqualMat();
+	testMatNotEqualMat();
+	testMatT();
+	testMatGetRow();
+	testMatGetCol();
+	testMatSlice();
+}

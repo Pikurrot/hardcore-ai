@@ -8,3 +8,5 @@ void testTruthTableInputs();
 void testTruthTableOutputs();
 void testAll();
 void testAny();
+
+void runTestsLinearAlgebra();
