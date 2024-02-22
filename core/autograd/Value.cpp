@@ -66,6 +66,11 @@ void Value::backward()
 	}
 }
 
+ValuePtr value(double data)
+{
+	return make_shared<Value>(data);
+}
+
 ValuePtr operator+(ValuePtr lhs, ValuePtr rhs)
 {
 	ValuePtr res = make_shared<Value>(

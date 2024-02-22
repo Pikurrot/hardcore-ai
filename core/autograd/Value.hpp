@@ -36,6 +36,8 @@ public:
 	void backward();
 };
 
+ValuePtr value(double data);
+
 ValuePtr operator+(ValuePtr lhs, ValuePtr rhs);
 ValuePtr operator+(ValuePtr lhs, double val);
 ValuePtr operator+(double val, ValuePtr rhs);
