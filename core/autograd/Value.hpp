@@ -22,6 +22,7 @@ public:
 		: _data(data), _grad(0), _children{children}, _backward{[]() {}} {};
 
 	std::function<void()> _backward;
+	int gradCount = 0;
 
 	double data() const { return this->_data; }
 	double grad() const { return this->_grad; }

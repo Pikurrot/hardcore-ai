@@ -2,6 +2,10 @@
 #include <functional>
 #include <vector>
 #include <cmath>
+#include <algorithm>
+#include <queue>
+#include <unordered_set>
+#include <unordered_map>
 
 using std::shared_ptr;
 using std::make_shared;
@@ -15,8 +19,9 @@ ValuePtr Value::pow(double exponent)
 	);
 
 	res->_backward = [this, res, exponent]() {
-		this->setGrad(this->grad() + exponent * std::pow(res->data(), exponent - 1) * res->grad());
+		this->setGrad(this->grad() + exponent * std::pow(this->data(), exponent - 1) * res->grad());
 	};
+	this->gradCount++;
 
 	return res;
 }
@@ -31,39 +36,43 @@ ValuePtr Value::exp()
 	res->_backward = [this, res]() {
 		this->setGrad(this->grad() + std::exp(this->data()) * res->grad());
 	};
+	this->gradCount++;
 
 	return res;
 }
 
 void Value::backward()
 {
-	std::vector<ValuePtr> leaves; // stack (DFS, LIFO)
-	std::vector<ValuePtr> visited; // topological order
-	leaves.push_back(shared_from_this());
+	std::queue<ValuePtr> leaves;
+	std::unordered_set<ValuePtr> visited;
+	std::unordered_map<ValuePtr, int> gradCount;
+	std::vector<ValuePtr> topo;
+	leaves.push(shared_from_this());
+	gradCount[shared_from_this()] = 0;
 
-	// build topological order of the graph
-	while (!leaves.empty())
-	{
-		ValuePtr leaf = leaves.back();
-		leaves.pop_back();
+	while (!leaves.empty()) {
+		auto leaf = leaves.front();
+		leaves.pop();
 
-		visited.push_back(leaf);
+		// there are more paths to leaf
+		if (gradCount[leaf] < leaf->gradCount) continue;
 
-		for (ValuePtr child : leaf->getChildren())
-		{
-			if (std::find(visited.begin(), visited.end(), child) == visited.end())
-			{
-				leaves.push_back(child);
-			}
+		topo.push_back(leaf);
+		visited.insert(leaf);
+
+		for (auto child : leaf->children()) {
+			if (visited.find(child) != visited.end()) continue;
+			leaves.push(child);
+
+			if (gradCount.find(child) == gradCount.end()) gradCount[child] = 1;
+			else gradCount[child]++;
 		}
 	}
 
 	// compute gradients
 	this->setGrad(1);
-	for (auto it = visited.rbegin(); it != visited.rend(); ++it)
-	{
+	for (auto it = topo.begin(); it != topo.end(); ++it)
 		(*it)->_backward();
-	}
 }
 
 ValuePtr value(double data)
@@ -82,6 +91,8 @@ ValuePtr operator+(ValuePtr lhs, ValuePtr rhs)
 		lhs->setGrad(lhs->grad() + res->grad());
 		rhs->setGrad(rhs->grad() + res->grad());
 	};
+	lhs->gradCount++;
+	rhs->gradCount++;
 
 	return res;
 }
@@ -109,6 +120,8 @@ ValuePtr operator*(ValuePtr lhs, ValuePtr rhs)
 		lhs->setGrad(lhs->grad() + rhs->data() * res->grad());
 		rhs->setGrad(rhs->grad() + lhs->data() * res->grad());
 	};
+	lhs->gradCount++;
+	rhs->gradCount++;
 
 	return res;
 }
