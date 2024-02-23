@@ -15,13 +15,17 @@ ValuePtr Value::pow(double exponent)
 {
 	ValuePtr res = make_shared<Value>(
 		std::pow(this->data(), exponent),
-		std::vector<ValuePtr>{ shared_from_this() }
+		std::vector<ValuePtr>{ shared_from_this() },
+		this->requiresGrad()
 	);
 
-	res->_backward = [this, res, exponent]() {
-		this->setGrad(this->grad() + exponent * std::pow(this->data(), exponent - 1) * res->grad());
-	};
-	this->gradCount++;
+	if (this->requiresGrad()) 
+	{
+		res->_backward = [this, res, exponent]() {
+			this->setGrad(this->grad() + exponent * std::pow(this->data(), exponent - 1) * res->grad());
+		};
+		this->gradCount++;
+	}
 
 	return res;
 }
@@ -30,13 +34,17 @@ ValuePtr Value::exp()
 {
 	ValuePtr res = make_shared<Value>(
 		std::exp(this->data()),
-		std::vector<ValuePtr>{ shared_from_this() }
+		std::vector<ValuePtr>{ shared_from_this() },
+		this->requiresGrad()
 	);
 
-	res->_backward = [this, res]() {
-		this->setGrad(this->grad() + std::exp(this->data()) * res->grad());
-	};
-	this->gradCount++;
+	if (this->requiresGrad()) 
+	{
+		res->_backward = [this, res]() {
+			this->setGrad(this->grad() + std::exp(this->data()) * res->grad());
+		};
+		this->gradCount++;
+	}
 
 	return res;
 }
@@ -45,13 +53,17 @@ ValuePtr Value::log()
 {
 	ValuePtr res = make_shared<Value>(
 		std::log(this->data()),
-		std::vector<ValuePtr>{ shared_from_this() }
+		std::vector<ValuePtr>{ shared_from_this() },
+		this->requiresGrad()
 	);
 
-	res->_backward = [this, res]() {
-		this->setGrad(this->grad() + 1 / this->data() * res->grad());
-	};
-	this->gradCount++;
+	if (this->requiresGrad()) 
+	{
+		res->_backward = [this, res]() {
+			this->setGrad(this->grad() + 1 / this->data() * res->grad());
+		};
+		this->gradCount++;
+	}
 
 	return res;
 }
@@ -90,24 +102,25 @@ void Value::backward()
 		(*it)->_backward();
 }
 
-ValuePtr value(double data)
+ValuePtr value(double data, int requiresGrad)
 {
-	return make_shared<Value>(data);
+	return make_shared<Value>(data, requiresGrad);
 }
 
 ValuePtr operator+(ValuePtr lhs, ValuePtr rhs)
 {
 	ValuePtr res = make_shared<Value>(
 		lhs->data() + rhs->data(), 
-		std::vector<ValuePtr>{lhs, rhs}
+		std::vector<ValuePtr>{lhs, rhs},
+		lhs->requiresGrad() || rhs->requiresGrad()
 	);
 
 	res->_backward = [res, lhs, rhs]() {
-		lhs->setGrad(lhs->grad() + res->grad());
-		rhs->setGrad(rhs->grad() + res->grad());
+		if (lhs->requiresGrad()) lhs->setGrad(lhs->grad() + res->grad());
+		if (rhs->requiresGrad()) rhs->setGrad(rhs->grad() + res->grad());
 	};
-	lhs->gradCount++;
-	rhs->gradCount++;
+	lhs->gradCount += lhs->requiresGrad();
+	rhs->gradCount += rhs->requiresGrad();
 
 	return res;
 }
@@ -128,15 +141,16 @@ ValuePtr operator*(ValuePtr lhs, ValuePtr rhs)
 {
 	ValuePtr res = make_shared<Value>(
 		lhs->data() * rhs->data(),
-		std::vector<ValuePtr>{lhs, rhs}
+		std::vector<ValuePtr>{lhs, rhs},
+		lhs->requiresGrad() || rhs->requiresGrad()
 	);
 
 	res->_backward = [res, lhs, rhs]() {
-		lhs->setGrad(lhs->grad() + rhs->data() * res->grad());
-		rhs->setGrad(rhs->grad() + lhs->data() * res->grad());
+		if (lhs->requiresGrad()) lhs->setGrad(lhs->grad() + rhs->data() * res->grad());
+		if (rhs->requiresGrad()) rhs->setGrad(rhs->grad() + lhs->data() * res->grad());
 	};
-	lhs->gradCount++;
-	rhs->gradCount++;
+	lhs->gradCount += lhs->requiresGrad();
+	rhs->gradCount += rhs->requiresGrad();
 
 	return res;
 }

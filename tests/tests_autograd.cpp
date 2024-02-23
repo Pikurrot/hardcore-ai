@@ -45,9 +45,9 @@ void testBackward()
 {
 	try
 	{
-		ValuePtr a = value(2.0);
-		ValuePtr b = value(3.0);
-		ValuePtr c = value(4.0);
+		ValuePtr a = value(2.0, 1);
+		ValuePtr b = value(3.0, 1);
+		ValuePtr c = value(4.0, 1);
 		ValuePtr d, e, f, g, h, i, j;
 
 		d = a * b;
