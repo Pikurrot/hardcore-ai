@@ -5,10 +5,10 @@ CC = g++
 CFLAGS = -Wall -std=c++14
 
 # Include paths
-INCLUDES = -I./core -I./tests
+INCLUDES = -I./core -I./tests -I.
 
 # Source files
-SRCS = $(wildcard core/*.cpp tests/*.cpp deep_learning/*.cpp)
+SRCS = $(wildcard core/*.cpp core/*/*.cpp tests/*.cpp deep_learning/*.cpp)
 
 # Object files directory
 OBJDIR = obj
