@@ -1,6 +1,7 @@
 #include "tests_linear_algebra.hpp"
 #include "tests_Mat.hpp"
 #include "tests_Perceptron.hpp"
+#include "tests_autograd.hpp"
 #include <iostream>
 
 int main(int argc, char *argv[])
@@ -14,6 +15,7 @@ int main(int argc, char *argv[])
 			runTestsLinearAlgebra();
 			runTestsMat();
 			runTestsPerceptron();
+			runTestsAutograd();
 			std::cout << "All tests passed!" << std::endl;
 		}
 		else
@@ -33,6 +35,10 @@ int main(int argc, char *argv[])
 				else if (test_name == "Perceptron")
 				{
 					runTestsPerceptron();
+				}
+				else if (test_name == "autograd")
+				{
+					runTestsAutograd();
 				}
 				else
 				{
