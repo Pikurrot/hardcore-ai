@@ -41,6 +41,21 @@ ValuePtr Value::exp()
 	return res;
 }
 
+ValuePtr Value::log()
+{
+	ValuePtr res = make_shared<Value>(
+		std::log(this->data()),
+		std::vector<ValuePtr>{ shared_from_this() }
+	);
+
+	res->_backward = [this, res]() {
+		this->setGrad(this->grad() + 1 / this->data() * res->grad());
+	};
+	this->gradCount++;
+
+	return res;
+}
+
 void Value::backward()
 {
 	std::queue<ValuePtr> leaves;

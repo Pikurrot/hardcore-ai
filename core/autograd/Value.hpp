@@ -33,6 +33,7 @@ public:
 
 	ValuePtr pow(double exponent);
 	ValuePtr exp();
+	ValuePtr log();
 
 	void backward();
 };
