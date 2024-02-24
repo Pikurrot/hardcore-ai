@@ -55,3 +55,10 @@ ValuePtr operator-(double val, ValuePtr rhs);
 ValuePtr operator/(ValuePtr lhs, ValuePtr rhs);
 ValuePtr operator/(ValuePtr lhs, double val);
 ValuePtr operator/(double val, ValuePtr rhs);
+
+// Activation functions
+
+ValuePtr sigmoid(ValuePtr x);
+ValuePtr tanh(ValuePtr x);
+ValuePtr relu(ValuePtr x);
+ValuePtr leakyRelu(ValuePtr x, double alpha = 0.01);

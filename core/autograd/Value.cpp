@@ -180,3 +180,79 @@ ValuePtr operator/(ValuePtr lhs, ValuePtr rhs) { return lhs * rhs->pow(-1); }
 ValuePtr operator/(ValuePtr lhs, double val) { return lhs * (1 / val); }
 
 ValuePtr operator/(double val, ValuePtr rhs) { return val * rhs->pow(-1); }
+
+ValuePtr sigmoid(ValuePtr x)
+{
+	ValuePtr res = make_shared<Value>(
+		1 / (1 + std::exp(-x->data())),
+		std::vector<ValuePtr>{x},
+		x->requiresGrad()
+	);
+
+	if (x->requiresGrad()) 
+	{
+		res->_backward = [res, x]() {
+			x->setGrad(x->grad() + res->data() * (1 - res->data()) * res->grad());
+		};
+		x->gradCount++;
+	}
+
+	return res;
+}
+
+ValuePtr tanh(ValuePtr x)
+{
+	ValuePtr res = make_shared<Value>(
+		std::tanh(x->data()),
+		std::vector<ValuePtr>{x},
+		x->requiresGrad()
+	);
+
+	if (x->requiresGrad()) 
+	{
+		res->_backward = [res, x]() {
+			x->setGrad(x->grad() + (1 - std::pow(res->data(), 2)) * res->grad());
+		};
+		x->gradCount++;
+	}
+
+	return res;
+}
+
+ValuePtr relu(ValuePtr x)
+{
+	ValuePtr res = make_shared<Value>(
+		std::max(0.0, x->data()),
+		std::vector<ValuePtr>{x},
+		x->requiresGrad()
+	);
+
+	if (x->requiresGrad() && res->data() > 0) 
+	{
+		res->_backward = [res, x]() {
+			x->setGrad(x->grad() + res->grad());
+		};
+		x->gradCount++;
+	}
+
+	return res;
+}
+
+ValuePtr leakyRelu(ValuePtr x, double alpha)
+{
+	ValuePtr res = make_shared<Value>(
+		x->data() > 0 ? x->data() : alpha * x->data(),
+		std::vector<ValuePtr>{x},
+		x->requiresGrad()
+	);
+
+	if (x->requiresGrad() && res->data() > 0) 
+	{
+		res->_backward = [res, x, alpha]() {
+			x->setGrad(x->grad() + (x->data() > 0 ? 1.0 : alpha) * res->grad());
+		};
+		x->gradCount++;
+	}
+
+	return res;
+}
